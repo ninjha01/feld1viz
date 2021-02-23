@@ -1,7 +1,13 @@
 
+* Presentation
+** Tech Stack
+   No need for a backend server
+   Essentially Free - 
+
 * Questions
 ** What interactions between ProteinViz and SequenceViz?
 ** Between each SequenceViz?
+** 
 
 * Fel d 1 Viz
 ** Components
