@@ -1,0 +1,39 @@
+
+* Fel d 1 Viz
+** Components
+*** ProteinViz
+**** 3D tetrameric crystal structure of Fel d 1
+**** Ribbon or Surface Structure
+     Button to toggle between
+**** Rotation
+**** TODO "Structure will be accompanied by protein sequences for Fel d 1 chains 1 & 2"
+     What does this mean?
+*** SequenceViz
+**** TODO User can select to see all domestic cat variants (from our sequence analysis of 50 cats)
+     Unclear what this means
+**** States
+***** Overview
+      User can click on a variant in the structure or sequence to get more details about frequency, mutation type… (e.g. arrow, box; perhaps highlight region of structure by zooming in or creating a pop-out)
+      Selecting a variant in the structure or sequence will highlight the variant in both locations (e.g. triangles or zoom or pop-out)
+****** TODO What data do I need?
+
+***** Variant (Exotic, Domestic)
+      User can select to see all sequence variants (from our sequence analysis of 50 domestic cats & 24 exotic cats)
+****** TODO What data do I need?
+***** Conserved target regions
+      User can select to view the proposed conserved regions of Fel d 1 (based on the sequence analysis) that would be potential CRISPR sgRNA target sites (e.g. highlight conserved regions in the structure and sequences)
+User can select to view the cut sites of the panel of 10 sgRNAs that we tested (may be an issue since some sgRNAs target the signal peptide, which isn’t shown in the structure)
+****** TODO What data do I need?
+***** Correlations/Trends
+When the user selects a variant, highlight other correlated variants to visualize trends (e.g. domestic cat variant at CH1 Arg5  variants at CH1 Trp18 & Leu82)
+****** TODO What data do I need?
+**** Structure
+     #+begin_src html
+       <div>
+	 <h1>{title}</h1>
+	 <Sequence />
+	 <Modal />
+	 <Selectors />
+       </div>
+     #+end_src
+
