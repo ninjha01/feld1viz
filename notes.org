@@ -1,23 +1,55 @@
 
 * Presentation
 ** Tech Stack
+   If we're not collecting any info on the user
+   and Data is relatively small - under 100MB per file
    No need for a backend server
-   Essentially Free - 
+
+   React app hosted on Github Pages.
+   React is popular and familiar to me, I use it at work.
+   Github Pages is cheap and simple.
+
+   Reasons we would need to switch - Auth, Data Collection, Complex and Persistant State, Serving large files.
+** Development Plan
+*** (Invisible) Setup
+    Create code repository
+    Set up Build/Deploy/Testing
+    Data handoff
+*** Interactions
+**** Show Structure and Sequence (cheap) 
+     3D visualization and accompanying static text boxes
+     Button to toggle between ribbon and surface structure
+**** Show Domestic/Exotic Variants (cheap)
+     Button to show all domestic or all exotic variants in both sequences
+**** Show Modal w/ information about variant onClick in sequence (cheap)
+     show information when clicking on sequence (very expensive)
+     highlight region of structure by zooming in (potentially expensive)
+**** Button to show all variants by exotic/domestic (cheap)
+**** Show Conserved target regions in sequence (cheap)
+     show in structure (expensive)
+**** Highlight correlated variants (cheap)
+     
+*** Polish
+**** Accompanying text
+**** UI/UX
+**** Tutorial
+** Cost
+   Domain:
+   With current scope: essentially Free (> 10cents/month)
 
 * Questions
-** What interactions between ProteinViz and SequenceViz?
 ** Between each SequenceViz?
-** 
+** Selecting a variant in the structure or sequence will highlight the variant in both locations
 
 * Fel d 1 Viz
 ** Components
 *** ProteinViz
+**** Implementation
+     http://3dmol.csb.pitt.edu/doc/tutorial-embeddable.html
 **** 3D tetrameric crystal structure of Fel d 1
 **** Ribbon or Surface Structure
      Button to toggle between
 **** Rotation
-**** TODO "Structure will be accompanied by protein sequences for Fel d 1 chains 1 & 2"
-     What does this mean?
 *** SequenceViz
 **** TODO User can select to see all domestic cat variants (from our sequence analysis of 50 cats)
      Unclear what this means
