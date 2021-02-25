@@ -3,32 +3,76 @@ import $ from "jquery";
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 
+interface Viewer {
+  setStyle: (sel: any, style: any) => void;
+  setClickable: (sel: any, clickable: boolean, callback: Function) => void;
+  render: () => void;
+}
+
 export const StructureViz = (props: { pdb: string }) => {
-  const [style, setStyle] = useState("stick");
-  const [clickedAtomIdx, setClickedAtomIdx] = useState("None");
+  const [style, setStyle] = useState("surface");
+  const [clickedIdx, setClickedIdx] = useState("None");
+  const [clickedResidue, setClickedResidue] = useState("None");
   const structureId = useRef("structureId");
 
+  const [viewer, setViewer] = useState<Viewer | null>(null);
+
+  useEffect(
+    function initializeViewer() {
+      const config = { backgroundColor: "#282c34" };
+      const _viewer = $3Dmol.createViewer(
+        structureId.current,
+        config
+      ) as Viewer;
+      if (_viewer != null) {
+        setViewer(_viewer);
+      } else {
+        alert("Failed to initialize viewer");
+      }
+    },
+    [structureId]
+  );
+
+  useEffect(() => {
+    const downloadAndViewPdb = async () => {
+      if (viewer != null) {
+        await $3Dmol.download("pdb:1pu0", viewer, {});
+        viewer.setClickable(
+          {},
+          true,
+          (atom: any, viewer: any, _: any, __: any) => {
+            setClickedIdx(atom.resi);
+            setClickedResidue(atom.resn);
+            viewer.zoomTo(
+              { resi: [atom.resi - 5, atom.resi, atom.resi + 5] },
+              1000
+            );
+          }
+        );
+        viewer.setStyle({}, { sphere: { radius: 3 } });
+        viewer.render();
+      }
+    };
+    downloadAndViewPdb();
+  }, [viewer]);
+
   const toggleSurfaceStick = () => {
-    const next = style === "surface" ? "stick" : "surface";
+    const next = style === "surface" ? "ribbon" : "surface";
     setStyle(next);
   };
 
-  useEffect(() => {
-    let config = { backgroundColor: "#282c34" };
-    let viewer = $3Dmol.createViewer(structureId.current, config);
-    $3Dmol.download("pdb:1pu0", viewer, {}, (m: any) => {
-      viewer.setStyle({}, { stick: {} });
-      viewer.setClickable(
-        {},
-        true,
-        (atom: any, viewer: any, _: any, __: any) => {
-          setClickedAtomIdx(atom.index);
+  useEffect(
+    function updateViewer() {
+      if (viewer !== null) {
+        if (style === "surface") {
+          viewer.setStyle({}, { sphere: { radius: 3 } });
+        } else if (style === "ribbon") {
+          viewer.setStyle({}, { cartoon: {} });
         }
-      );
-      viewer.zoomTo();
-      viewer.render();
-    });
-  }, [structureId]);
+      }
+    },
+    [style]
+  );
 
   return (
     <div>
@@ -42,8 +86,13 @@ export const StructureViz = (props: { pdb: string }) => {
           position: "relative",
         }}
       />
-      <p> Clicked index: {clickedAtomIdx}</p>
-      <input value="toggle surface/stick" type="button" />
+      <p> Clicked index: {clickedIdx}</p>
+      <p> Clicked residue: {clickedResidue}</p>
+      <input
+        value="toggle surface/ribbon"
+        type="button"
+        onClick={toggleSurfaceStick}
+      />
     </div>
   );
 };
