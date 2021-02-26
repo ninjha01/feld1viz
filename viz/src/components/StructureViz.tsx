@@ -6,13 +6,19 @@ import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 interface Viewer {
   setStyle: (sel: any, style: any) => void;
   setClickable: (sel: any, clickable: boolean, callback: Function) => void;
+  zoomTo: (sel: AtomSel, duration: number) => void;
   render: () => void;
+}
+
+interface AtomSel {
+  resi: number;
+  resn: string;
+  chain: string;
 }
 
 export const StructureViz = (props: { pdb: string }) => {
   const [style, setStyle] = useState("surface");
-  const [clickedIdx, setClickedIdx] = useState("None");
-  const [clickedResidue, setClickedResidue] = useState("None");
+  const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
   const structureId = useRef("structureId");
 
   const [viewer, setViewer] = useState<Viewer | null>(null);
@@ -33,6 +39,22 @@ export const StructureViz = (props: { pdb: string }) => {
     [structureId]
   );
 
+  useEffect(
+    function zoomToSelection() {
+      if (viewer !== null && clickedAtom != null) {
+        viewer.zoomTo(
+          {
+            resi: clickedAtom.resi,
+            resn: clickedAtom.resn,
+            chain: clickedAtom.chain,
+          },
+          1000
+        );
+      }
+    },
+    [clickedAtom]
+  );
+
   useEffect(() => {
     const downloadAndViewPdb = async () => {
       if (viewer != null) {
@@ -40,13 +62,8 @@ export const StructureViz = (props: { pdb: string }) => {
         viewer.setClickable(
           {},
           true,
-          (atom: any, viewer: any, _: any, __: any) => {
-            setClickedIdx(atom.resi);
-            setClickedResidue(atom.resn);
-            viewer.zoomTo(
-              { resi: [atom.resi - 5, atom.resi, atom.resi + 5] },
-              1000
-            );
+          (atom: AtomSel, _: any, __: any, ___: any) => {
+            setClickedAtom(atom);
           }
         );
         viewer.setStyle({}, { sphere: { radius: 3 } });
@@ -56,7 +73,7 @@ export const StructureViz = (props: { pdb: string }) => {
     downloadAndViewPdb();
   }, [viewer]);
 
-  const toggleSurfaceStick = () => {
+  const toggleSurfaceRibbon = () => {
     const next = style === "surface" ? "ribbon" : "surface";
     setStyle(next);
   };
@@ -66,12 +83,14 @@ export const StructureViz = (props: { pdb: string }) => {
       if (viewer !== null) {
         if (style === "surface") {
           viewer.setStyle({}, { sphere: { radius: 3 } });
+          viewer.render();
         } else if (style === "ribbon") {
-          viewer.setStyle({}, { cartoon: {} });
+          viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
+          viewer.render();
         }
       }
     },
-    [style]
+    [viewer, style]
   );
 
   return (
@@ -86,12 +105,13 @@ export const StructureViz = (props: { pdb: string }) => {
           position: "relative",
         }}
       />
-      <p> Clicked index: {clickedIdx}</p>
-      <p> Clicked residue: {clickedResidue}</p>
+      <p> Clicked index: {clickedAtom?.resi}</p>
+      <p> Clicked residue: {clickedAtom?.resn}</p>
+      <p> Clicked chain: {clickedAtom?.chain}</p>
       <input
         value="toggle surface/ribbon"
         type="button"
-        onClick={toggleSurfaceStick}
+        onClick={() => toggleSurfaceRibbon()}
       />
     </div>
   );
