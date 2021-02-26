@@ -3,11 +3,13 @@ import $ from "jquery";
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
+import { Sequence } from "./SequenceViz";
 
 export const StructureViz = (props: {
   pdb: string;
   clickCallback: (a: AtomSel) => void;
-  clicked: AtomSel;
+  clicked: AtomSel | null;
+  sequence: Sequence;
 }) => {
   const [style, setStyle] = useState("surface");
   const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
@@ -36,14 +38,11 @@ export const StructureViz = (props: {
   useEffect(
     function zoomToSelection() {
       if (viewer !== null && clickedAtom != null) {
-        props.clickCallback(clickedAtom);
-
+        props.clickCallback(props.sequence.residues[clickedAtom.resi]);
         viewer.zoomTo(
           {
             resi: clickedAtom.resi,
-            resn: clickedAtom.resn,
-            chain: clickedAtom.chain,
-          },
+          } as AtomSel /* HACK: actually implement zoom correctly */,
           1000
         );
       }
@@ -90,9 +89,8 @@ export const StructureViz = (props: {
   );
 
   return (
-    <div>
-      <h1>STRUCTURE</h1>
-      <p>PDB: {props.pdb}</p>
+    <div style={{ borderColor: "white", borderStyle: "solid", borderWidth: 3 }}>
+      <p>Fel d 1 | pdb: {props.pdb}</p>
       <div
         id={structureId.current}
         style={{

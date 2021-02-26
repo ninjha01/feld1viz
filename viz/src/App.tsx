@@ -98,7 +98,6 @@ const _sequence: Sequence = {
     { resn: "S", resi: 88, chain: "A" },
     { resn: "P", resi: 89, chain: "A" },
     { resn: "L", resi: 90, chain: "A" },
-    { resn: "C", resi: 91, chain: "A" },
   ],
 
   variants: [
@@ -130,17 +129,26 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1> Fel d 1 Viz</h1>
         <StructureViz
           pdb={"1PUO"}
           clickCallback={atomClicked}
           clicked={clickedSelection}
-        />
-        <SequenceViz
           sequence={_sequence}
-          clickCallback={atomClicked}
-          clicked={clickedSelection}
         />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <SequenceViz
+            title={"Chain 1"}
+            sequence={_sequence}
+            clickCallback={atomClicked}
+            clicked={clickedSelection}
+          />
+          <SequenceViz
+            title={"Chain 2"}
+            sequence={_sequence}
+            clickCallback={atomClicked}
+            clicked={clickedSelection}
+          />
+        </div>
       </header>
     </div>
   );

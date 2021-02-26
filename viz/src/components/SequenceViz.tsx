@@ -21,6 +21,7 @@ export interface Sequence {
 }
 
 export const SequenceViz = (props: {
+  title: string;
   sequence: Sequence;
   clickCallback: (r: Residue) => void;
   clicked: Residue | null;
@@ -28,7 +29,7 @@ export const SequenceViz = (props: {
   const [selectedResidue, setSelectedResiude] = useState<Residue | null>(null);
 
   useEffect(() => {
-    if (props.clicked !== null) {
+    if (props.clicked) {
       setSelectedResiude(props.clicked);
       console.log(
         "in structure, You clicked residue ",
@@ -49,12 +50,18 @@ export const SequenceViz = (props: {
     };
 
     return (
-      <div style={{ wordWrap: "break-word", width: 300 }}>
+      <div
+        style={{
+          wordWrap: "break-word",
+          width: 600,
+        }}
+      >
         {sequence.residues.map((r) => (
           <span
             style={{
               cursor: "pointer",
               fontSize: 32,
+              color: selectedResidue?.resi == r.resi ? "red" : "white",
             }}
             onClick={genOnClick(r)}
           >
@@ -64,9 +71,10 @@ export const SequenceViz = (props: {
       </div>
     );
   };
+
   return (
-    <div>
-      <h1>Sequence</h1>
+    <div style={{ borderColor: "white", borderStyle: "solid", borderWidth: 3 }}>
+      <h3>{props.title}</h3>
       {clickableSequence(props.sequence)}
       <p> Clicked residue: {selectedResidue?.resn}</p>
       <p> Clicked index: {selectedResidue?.resi}</p>
