@@ -2,21 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import $ from "jquery";
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
+import { AtomSel, Viewer } from "./3DmolTypes";
 
-interface Viewer {
-  setStyle: (sel: any, style: any) => void;
-  setClickable: (sel: any, clickable: boolean, callback: Function) => void;
-  zoomTo: (sel: AtomSel, duration: number) => void;
-  render: () => void;
-}
-
-interface AtomSel {
-  resi: number;
-  resn: string;
-  chain: string;
-}
-
-export const StructureViz = (props: { pdb: string }) => {
+export const StructureViz = (props: {
+  pdb: string;
+  clickCallback: (a: AtomSel) => void;
+  clicked: AtomSel;
+}) => {
   const [style, setStyle] = useState("surface");
   const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
   const structureId = useRef("structureId");
@@ -39,9 +31,13 @@ export const StructureViz = (props: { pdb: string }) => {
     [structureId]
   );
 
+  useEffect(() => setClickedAtom(props.clicked), [props.clicked]);
+
   useEffect(
     function zoomToSelection() {
       if (viewer !== null && clickedAtom != null) {
+        props.clickCallback(clickedAtom);
+
         viewer.zoomTo(
           {
             resi: clickedAtom.resi,
@@ -96,7 +92,7 @@ export const StructureViz = (props: { pdb: string }) => {
   return (
     <div>
       <h1>STRUCTURE</h1>
-      <p>{props.pdb}</p>
+      <p>PDB: {props.pdb}</p>
       <div
         id={structureId.current}
         style={{

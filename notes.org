@@ -1,4 +1,10 @@
 
+* TODO Grab residues from structure and try to construct a Sequence object
+* TODO Questions
+** What information to show on each variant?
+*** Does this differ for exotic/domestic?
+** What pdb should I display?
+** 
 * Presentation
 ** Tech Stack
    If we're not collecting any info on the user
