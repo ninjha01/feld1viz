@@ -1,14 +1,8 @@
 import React from "react";
 import "./App.css";
-import { StructureViz } from "./components/StructureViz";
 
-const SequenceViz = () => {
-  return (
-    <div>
-      <h1>Sequence</h1>
-    </div>
-  );
-};
+import { StructureViz } from "./components/StructureViz";
+import { SequenceViz } from "./components/SequenceViz";
 
 const App = () => {
   return (
