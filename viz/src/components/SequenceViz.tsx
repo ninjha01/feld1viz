@@ -27,6 +27,7 @@ export const SequenceViz = (props: {
   clicked: Residue | null;
 }) => {
   const [selectedResidue, setSelectedResiude] = useState<Residue | null>(null);
+  const [modalText, setModalText] = useState<string | null>(null);
 
   useEffect(() => {
     if (props.clicked) {
@@ -40,12 +41,38 @@ export const SequenceViz = (props: {
     }
   }, [props.clicked]);
 
+  const residueInRegion = (residue: Residue, region: Region) => {
+    return region.indices.includes(residue.resi);
+  };
+
+  const residueIsConserved = (residue: Residue) => {
+    return props.sequence.conservedRegions.some((region) =>
+      residueInRegion(residue, region)
+    );
+  };
+
+  const getVariants = (residue: Residue): Variant[] => {
+    const variants = new Set<Variant>();
+    props.sequence.variants.forEach((v) => {
+      if (v.region.indices.includes(residue.resi)) {
+        variants.add(v);
+      }
+    });
+    return Array.from(variants);
+  };
+
+  const modal = () => <div>{modalText && modalText}</div>;
+
   const clickableSequence = (sequence: Sequence) => {
-    const genOnClick = (r: Residue) => {
+    const genOnClick = (r: Residue, v?: Variant) => {
       return () => {
         setSelectedResiude(r);
-        console.log("You clicked residue", r.resn, "at index", r.resi);
         props.clickCallback(r);
+        if (v) {
+          setModalText(v.stats.join("\n"));
+        } else {
+          setModalText(null);
+        }
       };
     };
 
@@ -56,28 +83,62 @@ export const SequenceViz = (props: {
           width: 600,
         }}
       >
-        {sequence.residues.map((r) => (
-          <span
-            style={{
-              cursor: "pointer",
-              fontSize: 32,
-              color: selectedResidue?.resi == r.resi ? "red" : "white",
-            }}
-            onClick={genOnClick(r)}
-          >
-            {r.resn}
-          </span>
-        ))}
+        {sequence.residues.map((r) => {
+          const isSelected = selectedResidue?.resi == r.resi;
+          let primaryColor = isSelected ? "red" : "white";
+          let secondaryColor = isSelected ? "red" : "white";
+          const variants = getVariants(r);
+          const variant_types = variants.map((v) => v.variant_type);
+          if (!isSelected) {
+            if (variant_types.includes("domestic")) {
+              secondaryColor = "green";
+            }
+            if (variant_types.includes("exotic")) {
+              secondaryColor = "orange";
+            }
+            if (
+              variant_types.includes("domestic") &&
+              variant_types.includes("exotic")
+            ) {
+              primaryColor = "green";
+              secondaryColor = "orange";
+            }
+          }
+          const textDecoration = residueIsConserved(r) ? "underline" : "";
+          console.log(primaryColor, secondaryColor, isSelected);
+          return (
+            <span
+              style={{
+                cursor: "pointer",
+                fontFamily: "monospace",
+                fontSize: 32,
+                textDecoration: textDecoration,
+                background: `-webkit-linear-gradient(${primaryColor}, ${secondaryColor})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+              key={r.resi + primaryColor}
+              onClick={genOnClick(r, variants.values().next().value)}
+            >
+              {r.resn}
+            </span>
+          );
+        })}
       </div>
     );
   };
 
   return (
-    <div style={{ borderColor: "white", borderStyle: "solid", borderWidth: 3 }}>
+    <div
+      style={{
+        borderColor: "white",
+        borderStyle: "solid",
+        borderWidth: 3,
+      }}
+    >
       <h3>{props.title}</h3>
       {clickableSequence(props.sequence)}
-      <p> Clicked residue: {selectedResidue?.resn}</p>
-      <p> Clicked index: {selectedResidue?.resi}</p>
+      {modal()}
     </div>
   );
 };

@@ -1,3 +1,17 @@
+* Here's the information I'd need:
+** Sequence for each chain
+** Structure
+*** I'm now using the 2EJN pdb - is that correct or should I use a different structure?
+** Data
+   - Sequence to display
+   - For each variant
+     - Species List:
+     - Text you'd like to show when the variant is selected.
+     - Correlated variants
+   - List of Conserved Regions
+   - List of cut sites
+   - 
+
 
 * TODO Grab residues from structure and try to construct a Sequence object
 * TODO Questions

@@ -5,13 +5,16 @@ import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
 import { Sequence } from "./SequenceViz";
 
+type style = "ribbon" | "surface";
+
 export const StructureViz = (props: {
   pdb: string;
   clickCallback: (a: AtomSel) => void;
   clicked: AtomSel | null;
-  sequence: Sequence;
+  chain1_sequence: Sequence;
+  chain2_sequence: Sequence;
 }) => {
-  const [style, setStyle] = useState("surface");
+  const [style, setStyle] = useState<style>("ribbon");
   const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
   const structureId = useRef("structureId");
 
@@ -33,12 +36,21 @@ export const StructureViz = (props: {
     [structureId]
   );
 
-  useEffect(() => setClickedAtom(props.clicked), [props.clicked]);
+  useEffect(() => {
+    if (props.clicked) {
+      setClickedAtom(props.clicked)
+    }
+  }, [props.clicked]);
 
   useEffect(
     function zoomToSelection() {
       if (viewer !== null && clickedAtom != null) {
-        props.clickCallback(props.sequence.residues[clickedAtom.resi]);
+        if (clickedAtom.chain == "A") {
+          props.clickCallback(props.chain1_sequence.residues[clickedAtom.resi]);
+        }
+        if (clickedAtom.chain == "B") {
+          props.clickCallback(props.chain2_sequence.residues[clickedAtom.resi]);
+        }
         viewer.zoomTo(
           {
             resi: clickedAtom.resi,
@@ -53,20 +65,21 @@ export const StructureViz = (props: {
   useEffect(() => {
     const downloadAndViewPdb = async () => {
       if (viewer != null) {
-        await $3Dmol.download("pdb:1pu0", viewer, {});
+        await $3Dmol.download(`pdb:${props.pdb}`, viewer, {});
         viewer.setClickable(
           {},
           true,
           (atom: AtomSel, _: any, __: any, ___: any) => {
-            setClickedAtom(atom);
+            setClickedAtom(atom)
           }
         );
-        viewer.setStyle({}, { sphere: { radius: 3 } });
+        viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
+
         viewer.render();
       }
     };
     downloadAndViewPdb();
-  }, [viewer]);
+  }, [viewer, props.pdb]);
 
   const toggleSurfaceRibbon = () => {
     const next = style === "surface" ? "ribbon" : "surface";
@@ -101,7 +114,7 @@ export const StructureViz = (props: {
       />
       <p> Clicked index: {clickedAtom?.resi}</p>
       <p> Clicked residue: {clickedAtom?.resn}</p>
-      <p> Clicked chain: {clickedAtom?.chain}</p>
+      <p> Clicked chain: {clickedAtom?.chain == "A" ? "1" : "2"}</p>
       <input
         value="toggle surface/ribbon"
         type="button"
