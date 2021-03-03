@@ -5,6 +5,9 @@ import { StructureViz } from "./components/StructureViz";
 import { SequenceViz, Sequence } from "./components/SequenceViz";
 import { AtomSel } from "./components/3DmolTypes";
 import { chain1_sequence, chain2_sequence } from "./sequence";
+import { Container, Row, Col } from "react-bootstrap";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [clickedSelection1, setClickedSelection1] = useState<AtomSel | null>(
@@ -28,16 +31,18 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <StructureViz
-          pdb={"2EJN"}
-          clickCallback={atomClicked}
-          clicked={clickedToDisplay}
-          chain1_sequence={chain1_sequence}
-          chain2_sequence={chain2_sequence}
-        />
-        <div style={{ display: "flex", flexDirection: "column" }}>
+    <Container className="App">
+      <Row>
+        <Col sm={12} lg={6}>
+          <StructureViz
+            pdb={"2EJN"}
+            clickCallback={atomClicked}
+            clicked={clickedToDisplay}
+            chain1_sequence={chain1_sequence}
+            chain2_sequence={chain2_sequence}
+          />
+        </Col>
+        <Col sm={12} lg={6}>
           <SequenceViz
             title={"Chain 1"}
             sequence={chain1_sequence}
@@ -50,9 +55,9 @@ const App = () => {
             clickCallback={atomClicked}
             clicked={clickedSelection2}
           />
-        </div>
-      </header>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import $ from "jquery";
+import { useState, useEffect, useRef } from "react";
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
@@ -38,17 +37,17 @@ export const StructureViz = (props: {
 
   useEffect(() => {
     if (props.clicked) {
-      setClickedAtom(props.clicked)
+      setClickedAtom(props.clicked);
     }
   }, [props.clicked]);
 
   useEffect(
     function zoomToSelection() {
       if (viewer !== null && clickedAtom != null) {
-        if (clickedAtom.chain == "A") {
+        if (clickedAtom.chain === "A") {
           props.clickCallback(props.chain1_sequence.residues[clickedAtom.resi]);
         }
-        if (clickedAtom.chain == "B") {
+        if (clickedAtom.chain === "B") {
           props.clickCallback(props.chain2_sequence.residues[clickedAtom.resi]);
         }
         viewer.zoomTo(
@@ -70,7 +69,7 @@ export const StructureViz = (props: {
           {},
           true,
           (atom: AtomSel, _: any, __: any, ___: any) => {
-            setClickedAtom(atom)
+            setClickedAtom(atom);
           }
         );
         viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
@@ -102,14 +101,27 @@ export const StructureViz = (props: {
   );
 
   return (
-    <div style={{ borderColor: "white", borderStyle: "solid", borderWidth: 3 }}>
+    <div
+      style={{
+        borderColor: "white",
+        borderStyle: "solid",
+        borderWidth: 3,
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        justifyContent: "center",
+        padding: 8,
+        minWidth: 500,
+      }}
+    >
       <p>Fel d 1 | pdb: {props.pdb}</p>
       <div
         id={structureId.current}
         style={{
-          width: 500,
+          width: 400,
           height: 400,
           position: "relative",
+          alignSelf: "center",
         }}
       />
       <p> Clicked index: {clickedAtom?.resi}</p>

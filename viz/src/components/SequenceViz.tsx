@@ -80,7 +80,7 @@ export const SequenceViz = (props: {
       <div
         style={{
           wordWrap: "break-word",
-          width: 600,
+          maxWidth: 800,
         }}
       >
         {sequence.residues.map((r) => {
