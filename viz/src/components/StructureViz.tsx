@@ -58,7 +58,7 @@ export const StructureViz = (props: {
         );
       }
     },
-    [clickedAtom]
+    [props.clickCallback, clickedAtom, viewer]
   );
 
   useEffect(() => {

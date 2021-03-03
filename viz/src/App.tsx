@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import { StructureViz } from "./components/StructureViz";
-import { SequenceViz, Sequence } from "./components/SequenceViz";
+import { SequenceViz } from "./components/SequenceViz";
 import { AtomSel } from "./components/3DmolTypes";
 import { chain1_sequence, chain2_sequence } from "./sequence";
 import { Container, Row, Col } from "react-bootstrap";
+import { assert, ErrorBoundary } from "./utils"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const App = () => {
   const [clickedSelection1, setClickedSelection1] = useState<AtomSel | null>(
@@ -21,7 +23,8 @@ const App = () => {
   );
   const atomClicked = (r: AtomSel) => {
     setClickedToDisplay(r);
-    if (r.chain == "A") {
+    assert(r != null, "Selection is null")
+    if (r.chain === "A") {
       setClickedSelection1(r);
       setClickedSelection2(null);
     } else {
@@ -34,27 +37,33 @@ const App = () => {
     <Container className="App">
       <Row>
         <Col sm={12} lg={6}>
-          <StructureViz
-            pdb={"2EJN"}
-            clickCallback={atomClicked}
-            clicked={clickedToDisplay}
-            chain1_sequence={chain1_sequence}
-            chain2_sequence={chain2_sequence}
-          />
+          <ErrorBoundary>
+            <StructureViz
+              pdb={"2EJN"}
+              clickCallback={atomClicked}
+              clicked={clickedToDisplay}
+              chain1_sequence={chain1_sequence}
+              chain2_sequence={chain2_sequence}
+            />
+          </ErrorBoundary>
         </Col>
         <Col sm={12} lg={6}>
-          <SequenceViz
-            title={"Chain 1"}
-            sequence={chain1_sequence}
-            clickCallback={atomClicked}
-            clicked={clickedSelection1}
-          />
-          <SequenceViz
-            title={"Chain 2"}
-            sequence={chain2_sequence}
-            clickCallback={atomClicked}
-            clicked={clickedSelection2}
-          />
+          <ErrorBoundary>
+            <SequenceViz
+              title={"Chain 1"}
+              sequence={chain1_sequence}
+              clickCallback={atomClicked}
+              clicked={clickedSelection1}
+            />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <SequenceViz
+              title={"Chain 2"}
+              sequence={chain2_sequence}
+              clickCallback={atomClicked}
+              clicked={clickedSelection2}
+            />
+          </ErrorBoundary>
         </Col>
       </Row>
     </Container>

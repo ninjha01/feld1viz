@@ -32,12 +32,6 @@ export const SequenceViz = (props: {
   useEffect(() => {
     if (props.clicked) {
       setSelectedResiude(props.clicked);
-      console.log(
-        "in structure, You clicked residue ",
-        props.clicked.resn,
-        "at index",
-        props.clicked.resi
-      );
     }
   }, [props.clicked]);
 
@@ -84,7 +78,7 @@ export const SequenceViz = (props: {
         }}
       >
         {sequence.residues.map((r) => {
-          const isSelected = selectedResidue?.resi == r.resi;
+          const isSelected = selectedResidue?.resi === r.resi;
           let primaryColor = isSelected ? "red" : "white";
           let secondaryColor = isSelected ? "red" : "white";
           const variants = getVariants(r);
@@ -105,7 +99,6 @@ export const SequenceViz = (props: {
             }
           }
           const textDecoration = residueIsConserved(r) ? "underline" : "";
-          console.log(primaryColor, secondaryColor, isSelected);
           return (
             <span
               style={{
