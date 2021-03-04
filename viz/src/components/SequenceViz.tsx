@@ -3,6 +3,9 @@ import { AtomSel } from "./3DmolTypes";
 
 type Residue = AtomSel;
 
+
+
+
 interface Region {
   indices: number[];
   residues: Residue[];
@@ -70,6 +73,53 @@ export const SequenceViz = (props: {
       };
     };
 
+    const getColors = (r: Residue, variants: Variant[]) => {
+      const isSelected = selectedResidue?.resi === r.resi;
+      let primaryColor = isSelected ? "red" : "white";
+      let secondaryColor = isSelected ? "red" : "white";
+      const variant_types = variants.map((v) => v.variant_type);
+      if (!isSelected) {
+        if (variant_types.includes("domestic")) {
+          secondaryColor = "green";
+        }
+        if (variant_types.includes("exotic")) {
+          secondaryColor = "orange";
+        }
+        if (
+          variant_types.includes("domestic") &&
+          variant_types.includes("exotic")
+        ) {
+          primaryColor = "green";
+          secondaryColor = "orange";
+        }
+      }
+      return { primaryColor, secondaryColor }
+    }
+
+    const renderResidue = (r: Residue) => {
+      const variants = getVariants(r);
+      const { primaryColor, secondaryColor } = getColors(r, variants)
+      const textDecoration = residueIsConserved(r) ? "underline" : "";
+      const relevantVariant = variants.values().next().value // use first variant
+      return (
+        <span
+          style={{
+            cursor: "pointer",
+            fontFamily: "monospace",
+            fontSize: 32,
+            textDecoration: textDecoration,
+            background: `-webkit-linear-gradient(${primaryColor}, ${secondaryColor})`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+          key={r.resi + primaryColor}
+          onClick={genOnClick(r, relevantVariant)}
+        >
+          {r.resn}
+        </span>
+      );
+    }
+
     return (
       <div
         style={{
@@ -77,46 +127,7 @@ export const SequenceViz = (props: {
           maxWidth: 800,
         }}
       >
-        {sequence.residues.map((r) => {
-          const isSelected = selectedResidue?.resi === r.resi;
-          let primaryColor = isSelected ? "red" : "white";
-          let secondaryColor = isSelected ? "red" : "white";
-          const variants = getVariants(r);
-          const variant_types = variants.map((v) => v.variant_type);
-          if (!isSelected) {
-            if (variant_types.includes("domestic")) {
-              secondaryColor = "green";
-            }
-            if (variant_types.includes("exotic")) {
-              secondaryColor = "orange";
-            }
-            if (
-              variant_types.includes("domestic") &&
-              variant_types.includes("exotic")
-            ) {
-              primaryColor = "green";
-              secondaryColor = "orange";
-            }
-          }
-          const textDecoration = residueIsConserved(r) ? "underline" : "";
-          return (
-            <span
-              style={{
-                cursor: "pointer",
-                fontFamily: "monospace",
-                fontSize: 32,
-                textDecoration: textDecoration,
-                background: `-webkit-linear-gradient(${primaryColor}, ${secondaryColor})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-              key={r.resi + primaryColor}
-              onClick={genOnClick(r, variants.values().next().value)}
-            >
-              {r.resn}
-            </span>
-          );
-        })}
+        {sequence.residues.map((r) => renderResidue(r))}
       </div>
     );
   };

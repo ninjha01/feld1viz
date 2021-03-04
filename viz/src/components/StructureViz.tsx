@@ -69,7 +69,9 @@ export const StructureViz = (props: {
           {},
           true,
           (atom: AtomSel, _: any, __: any, ___: any) => {
-            setClickedAtom(atom);
+            /* setClickedAtom(atom); */
+            debugger;
+            viewer.zoomTo(atom, 100);
           }
         );
         viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
