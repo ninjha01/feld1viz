@@ -4,12 +4,13 @@ import "./App.css";
 import { StructureViz } from "./components/StructureViz";
 import { SequenceViz } from "./components/SequenceViz";
 import { AtomSel } from "./components/3DmolTypes";
-import { chain1_sequence, chain2_sequence } from "./sequence";
+import { chain1_sequence } from "./sequence";
 import { Container, Row, Col } from "react-bootstrap";
 import { assert, ErrorBoundary } from "./utils"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const chain2_sequence = chain1_sequence
 
 const App = () => {
   const [clickedSelection1, setClickedSelection1] = useState<AtomSel | null>(
