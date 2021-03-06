@@ -1,3 +1,16 @@
+
+* New questions
+** TODO What to do about MNPs?
+   How to display? Why only one position?
+** TODO What about Ile84, Ser85, Ser86?
+*** No data or "-" should display or not?
+** TODO Fasta sequence for 2EJN doesn't seem to match up with chain1/2
+   i.e. 
+   fasta:   MEICPAVKR
+   chain 1: MKGARVLVL
+   chain 2: MRGALLVLA
+*** How to know which residue to highlight onClick?
+
 * Here's the information I'd need:
 ** Sequence for each chain
 ** Structure
@@ -13,8 +26,10 @@
    - 
 
 
-* TODO Grab residues from structure and try to construct a Sequence object
-* TODO Questions
+* DONE Grab residues from structure and try to construct a Sequence object
+  CLOSED: [2021-03-06 Sat 07:54]
+* DONE Questions
+  CLOSED: [2021-03-06 Sat 07:54]
 ** What information to show on each variant?
 *** Does this differ for exotic/domestic?
 ** What pdb should I display?

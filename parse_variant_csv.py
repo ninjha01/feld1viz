@@ -140,33 +140,20 @@ def gen_variants(df):
         total_freq = (
             float(sum(list(variations_count.values()))) / float(50) * float(100)
         )
-        sub_count = 0
-        amb_count = 0
-        if len(list(variations_count.keys())) == 1:
-            key1 = list(variations_count.keys())[0]
-            key2 = None
-        elif len(list(variations_count.keys())) == 2:
-            key1 = list(variations_count.keys())[0]
-            key2 = list(variations_count.keys())[1]
-        else:
-            print("Passing", res, vals, variations_count)
-            continue
-        for k in [k for k in [key1, key2] if k is not None]:
-            if "/" in k:
-                amb_count = variations_count[k]
+        stats = [
+            f"SNP: {amb}",
+            f"{round(total_freq,2)}% of cats (50 total)",
+        ]
+        for var, count in variations_count.items():
+            if "/" in var:
+                stats.append(f"{count} cats with ambiguity {var}")
             else:
-                sub_count = variations_count[k]
-
+                stats.append(f"{count} cats with substitution {var}")
         variants.append(
             Variant(
                 id=i,
                 indices=[int(idx) - 1],
-                stats=[
-                    f"SNP: {amb}",
-                    f"{round(total_freq,2)}% of cats (50 total)",
-                    f"{sub_count} cats with substitution",
-                    f"{amb_count} cats with ambiguity",
-                ],
+                stats=stats,
                 variant_type="domestic",
             )
         )
@@ -175,4 +162,5 @@ def gen_variants(df):
 
 pprint([v.__dict__ for v in gen_variants(pd.read_csv(StringIO(chain1)))])
 input()
+print("-------")
 pprint([v.__dict__ for v in gen_variants(pd.read_csv(StringIO(chain2)))])

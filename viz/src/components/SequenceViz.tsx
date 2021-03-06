@@ -8,6 +8,7 @@ interface Variant {
   indices: number[];
   stats: string[];
   variant_type: "domestic" | "exotic";
+  correlated_ids: number[];
 }
 
 export interface Sequence {
@@ -24,16 +25,7 @@ export const SequenceViz = (props: {
 }) => {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
   const [modalText, setModalText] = useState<string[] | null>(null);
-  /*
-   *   useEffect(() => {
-   *     if (props.clicked) {
-   *       setSelectedResidue(props.clicked);
-   *     }
-   *   }, [props.clicked]);
-   *  */
-  const residueInRegion = (residue: Residue, region: number[]) => {
-    return region.includes(residue.resi);
-  };
+  const [correlated, setCorrelated] = useState<number[] | undefined>(undefined);
 
   const getVariants = (residue: Residue): Variant[] => {
     const variants = new Set<Variant>();
@@ -64,6 +56,14 @@ export const SequenceViz = (props: {
     const genOnClick = (r: Residue, v?: Variant) => {
       return () => {
         setSelectedResidue(r);
+        if (sequence && v) {
+          const corVars: number[] = v.correlated_ids
+            .map((i) => sequence.variants.find((x) => x.id == i).indices)
+            .flat();
+          setCorrelated(corVars);
+        } else {
+          setCorrelated(undefined);
+        }
         /* props.clickCallback(r); */
         if (v) {
           setModalText(v.stats);
@@ -73,7 +73,14 @@ export const SequenceViz = (props: {
       };
     };
 
-    const getColors = (r: Residue, variants: Variant[]) => {
+    const getColors = (
+      r: Residue,
+      variants: Variant[],
+      correlatedIds: number[]
+    ) => {
+      if (correlatedIds.includes(r.resi)) {
+        return { primaryColor: "blue", secondaryColor: "blue" };
+      }
       const isSelected = selectedResidue?.resi === r.resi;
       let primaryColor = isSelected ? "red" : "white";
       let secondaryColor = isSelected ? "red" : "white";
@@ -98,7 +105,12 @@ export const SequenceViz = (props: {
 
     const renderResidue = (r: Residue) => {
       const variants = getVariants(r);
-      const { primaryColor, secondaryColor } = getColors(r, variants);
+      const correlatedIds = correlated ? correlated : [];
+      const { primaryColor, secondaryColor } = getColors(
+        r,
+        variants,
+        correlatedIds
+      );
       const relevantVariant = variants.values().next().value; // use first variant
       return (
         <span
@@ -106,7 +118,6 @@ export const SequenceViz = (props: {
             cursor: "pointer",
             fontFamily: "monospace",
             fontSize: 32,
-            textDecoration: "",
             background: `-webkit-linear-gradient(${primaryColor}, ${secondaryColor})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
