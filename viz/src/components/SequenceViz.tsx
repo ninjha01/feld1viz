@@ -3,7 +3,6 @@ import { AtomSel } from "./3DmolTypes";
 
 type Residue = AtomSel;
 
-
 interface Variant {
   id: number;
   indices: number[];
@@ -24,8 +23,8 @@ export const SequenceViz = (props: {
   clicked: Residue | null;
 }) => {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
-  const [modalText, setModalText] = useState<string | null>(null);
-  /* 
+  const [modalText, setModalText] = useState<string[] | null>(null);
+  /*
    *   useEffect(() => {
    *     if (props.clicked) {
    *       setSelectedResidue(props.clicked);
@@ -35,8 +34,6 @@ export const SequenceViz = (props: {
   const residueInRegion = (residue: Residue, region: number[]) => {
     return region.includes(residue.resi);
   };
-
-
 
   const getVariants = (residue: Residue): Variant[] => {
     const variants = new Set<Variant>();
@@ -48,7 +45,20 @@ export const SequenceViz = (props: {
     return Array.from(variants);
   };
 
-  const modal = () => <div>{modalText && modalText}</div>;
+  const modal = () => {
+    if (modalText) {
+      return (
+        <div>
+          <h3> Stats: </h3>
+          <ul>
+            {modalText.map((x) => {
+              return <li>{x}</li>;
+            })}
+          </ul>
+        </div>
+      );
+    }
+  };
 
   const clickableSequence = (sequence: Sequence) => {
     const genOnClick = (r: Residue, v?: Variant) => {
@@ -56,7 +66,7 @@ export const SequenceViz = (props: {
         setSelectedResidue(r);
         /* props.clickCallback(r); */
         if (v) {
-          setModalText(v.stats.join("\n"));
+          setModalText(v.stats);
         } else {
           setModalText(null);
         }
@@ -83,13 +93,13 @@ export const SequenceViz = (props: {
           secondaryColor = "orange";
         }
       }
-      return { primaryColor, secondaryColor }
-    }
+      return { primaryColor, secondaryColor };
+    };
 
     const renderResidue = (r: Residue) => {
       const variants = getVariants(r);
-      const { primaryColor, secondaryColor } = getColors(r, variants)
-      const relevantVariant = variants.values().next().value // use first variant
+      const { primaryColor, secondaryColor } = getColors(r, variants);
+      const relevantVariant = variants.values().next().value; // use first variant
       return (
         <span
           style={{
@@ -107,7 +117,7 @@ export const SequenceViz = (props: {
           {r.resn}
         </span>
       );
-    }
+    };
 
     return (
       <div
