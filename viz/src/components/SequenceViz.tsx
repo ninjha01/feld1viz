@@ -4,15 +4,9 @@ import { AtomSel } from "./3DmolTypes";
 type Residue = AtomSel;
 
 
-
-
-interface Region {
-  indices: number[];
-  residues: Residue[];
-}
-
 interface Variant {
-  region: Region;
+  id: number;
+  indices: number[];
   stats: string[];
   variant_type: "domestic" | "exotic";
 }
@@ -20,7 +14,7 @@ interface Variant {
 export interface Sequence {
   residues: Residue[];
   variants: Variant[];
-  conservedRegions: Region[];
+  conservedRegions: number[];
 }
 
 export const SequenceViz = (props: {
@@ -29,29 +23,25 @@ export const SequenceViz = (props: {
   clickCallback: (r: Residue) => void;
   clicked: Residue | null;
 }) => {
-  const [selectedResidue, setSelectedResiude] = useState<Residue | null>(null);
+  const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
   const [modalText, setModalText] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (props.clicked) {
-      setSelectedResiude(props.clicked);
-    }
-  }, [props.clicked]);
-
-  const residueInRegion = (residue: Residue, region: Region) => {
-    return region.indices.includes(residue.resi);
+  /* 
+   *   useEffect(() => {
+   *     if (props.clicked) {
+   *       setSelectedResidue(props.clicked);
+   *     }
+   *   }, [props.clicked]);
+   *  */
+  const residueInRegion = (residue: Residue, region: number[]) => {
+    return region.includes(residue.resi);
   };
 
-  const residueIsConserved = (residue: Residue) => {
-    return props.sequence.conservedRegions.some((region) =>
-      residueInRegion(residue, region)
-    );
-  };
+
 
   const getVariants = (residue: Residue): Variant[] => {
     const variants = new Set<Variant>();
     props.sequence.variants.forEach((v) => {
-      if (v.region.indices.includes(residue.resi)) {
+      if (v.indices.includes(residue.resi)) {
         variants.add(v);
       }
     });
@@ -63,8 +53,8 @@ export const SequenceViz = (props: {
   const clickableSequence = (sequence: Sequence) => {
     const genOnClick = (r: Residue, v?: Variant) => {
       return () => {
-        setSelectedResiude(r);
-        props.clickCallback(r);
+        setSelectedResidue(r);
+        /* props.clickCallback(r); */
         if (v) {
           setModalText(v.stats.join("\n"));
         } else {
@@ -99,7 +89,6 @@ export const SequenceViz = (props: {
     const renderResidue = (r: Residue) => {
       const variants = getVariants(r);
       const { primaryColor, secondaryColor } = getColors(r, variants)
-      const textDecoration = residueIsConserved(r) ? "underline" : "";
       const relevantVariant = variants.values().next().value // use first variant
       return (
         <span
@@ -107,7 +96,7 @@ export const SequenceViz = (props: {
             cursor: "pointer",
             fontFamily: "monospace",
             fontSize: 32,
-            textDecoration: textDecoration,
+            textDecoration: "",
             background: `-webkit-linear-gradient(${primaryColor}, ${secondaryColor})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
