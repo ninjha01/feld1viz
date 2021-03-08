@@ -113,7 +113,6 @@ export const StructureViz = (props: {
         display: "flex",
         flexDirection: "column",
         padding: 8,
-        maxWidth: "100vw",
         position: "relative",
         margin: 16
       }}
@@ -122,14 +121,14 @@ export const StructureViz = (props: {
       <div
         id={structureId.current}
         style={{
-          minWidth: 200,
-          minHeight: 200,
+          minWidth: "40vw",
+          minHeight: "40vw",
           position: "relative",
           alignSelf: "center",
         }}
       />
       <Button
-        style={{ margin: 8 }}
+        style={{ margin: 16 }}
         variant="secondary"
         onClick={() => toggleSurfaceRibbon()}
       >

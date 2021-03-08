@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AtomSel } from "./3DmolTypes";
 import { Col, Button } from "react-bootstrap";
+import { colors } from "../colors";
 
 type Residue = AtomSel;
 
@@ -87,15 +88,15 @@ export const SequenceViz = (props: {
       correlatedIds: number[]
     ) => {
       if (correlatedIds.includes(r.resi)) {
-        return { primaryColor: "blue", secondaryColor: "blue" };
+        return { primaryColor: colors.blue, secondaryColor: colors.blue };
       }
       const isSelected = selectedResidue?.resi === r.resi;
-      let primaryColor = isSelected ? "red" : "white";
-      let secondaryColor = isSelected ? "red" : "white";
+      let primaryColor = isSelected ? colors.red : colors.white;
+      let secondaryColor = isSelected ? colors.red : colors.white;
       const variant_types = variants.map((v) => v.variant_type);
       if (!isSelected) {
         if (variant_types.includes("domestic")) {
-          secondaryColor = "green";
+          secondaryColor = colors.green; // Green
         }
         if (variant_types.includes("exotic")) {
           secondaryColor = "orange";
@@ -104,7 +105,7 @@ export const SequenceViz = (props: {
           variant_types.includes("domestic") &&
           variant_types.includes("exotic")
         ) {
-          primaryColor = "green";
+          primaryColor = colors.green; // Green
           secondaryColor = "orange";
         }
       }
@@ -155,7 +156,7 @@ export const SequenceViz = (props: {
   return (
     <div
       style={{
-        borderColor: "white",
+        borderColor: colors.white,
         borderStyle: "solid",
         borderWidth: 3,
         borderRadius: 12,

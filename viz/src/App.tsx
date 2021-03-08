@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
 
+import { Container, Row, Col } from "react-bootstrap";
+import { assert, ErrorBoundary } from "./utils"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 import { StructureViz } from "./components/StructureViz";
 import { SequenceViz } from "./components/SequenceViz";
 import { AtomSel } from "./components/3DmolTypes";
+import { Legend } from "./components/Legend";
 import { chain1_sequence, chain2_sequence } from "./sequence";
-import { Container, Row, Col } from "react-bootstrap";
-import { assert, ErrorBoundary } from "./utils"
-
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const App = () => {
@@ -48,6 +50,9 @@ const App = () => {
           </ErrorBoundary>
         </Col>
         <Col sm={12} lg={6} >
+          <ErrorBoundary>
+            <Legend />
+          </ErrorBoundary>
           <ErrorBoundary>
             <SequenceViz
               title={"Chain 1"}
