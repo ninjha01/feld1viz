@@ -122,8 +122,8 @@ export const StructureViz = (props: {
       <div
         id={structureId.current}
         style={{
-          width: 400,
-          height: 400,
+          minWidth: 200,
+          minHeight: 200,
           position: "relative",
           alignSelf: "center",
         }}
