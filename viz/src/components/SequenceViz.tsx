@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AtomSel } from "./3DmolTypes";
+import { Col, Button } from "react-bootstrap";
 
 type Residue = AtomSel;
 
@@ -26,7 +27,6 @@ export const SequenceViz = (props: {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
   const [modalText, setModalText] = useState<string[] | null>(null);
   const [correlated, setCorrelated] = useState<number[] | undefined>(undefined);
-
   const getVariants = (residue: Residue): Variant[] => {
     const variants = new Set<Variant>();
     props.sequence.variants.forEach((v) => {
@@ -38,10 +38,18 @@ export const SequenceViz = (props: {
   };
 
   const modal = () => {
+    const modalStyle = {
+      backgroundColor: "#6c757d",
+      color: "#fff",
+      borderRadius: 12,
+      padding: 8,
+      margin: 16,
+      fontSize: 16,
+      textAlign: "left" as "left",
+    };
     if (modalText) {
       return (
-        <div>
-          <h3> Stats: </h3>
+        <div style={modalStyle} className={"FadeIn"}>
           <ul>
             {modalText.map((x) => {
               return <li>{x}</li>;
@@ -58,7 +66,7 @@ export const SequenceViz = (props: {
         setSelectedResidue(r);
         if (sequence && v) {
           const corVars: number[] = v.correlated_ids
-            .map((i) => sequence.variants.find((x) => x.id == i).indices)
+            .map((i) => sequence.variants.find((x) => x.id == i)!.indices)
             .flat();
           setCorrelated(corVars);
         } else {
@@ -134,7 +142,9 @@ export const SequenceViz = (props: {
       <div
         style={{
           wordWrap: "break-word",
-          maxWidth: 800,
+          maxWidth: "100vw",
+          margin: 16,
+          textAlign: "left",
         }}
       >
         {sequence.residues.map((r) => renderResidue(r))}
@@ -148,6 +158,8 @@ export const SequenceViz = (props: {
         borderColor: "white",
         borderStyle: "solid",
         borderWidth: 3,
+        borderRadius: 12,
+        maxWidth: "100vw",
       }}
     >
       <h3>{props.title}</h3>

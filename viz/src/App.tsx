@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <Container className="App">
-      <Row>
+      <Row style={{ padding: 16, width: "100vw", alignSelf: "center" }} className="align-items-center">
         <Col sm={12} lg={6}>
           <ErrorBoundary>
             <StructureViz
@@ -47,7 +47,7 @@ const App = () => {
             />
           </ErrorBoundary>
         </Col>
-        <Col sm={12} lg={6}>
+        <Col sm={12} lg={6} >
           <ErrorBoundary>
             <SequenceViz
               title={"Chain 1"}
@@ -56,6 +56,7 @@ const App = () => {
               clicked={clickedSelection1}
             />
           </ErrorBoundary>
+          <br />
           <ErrorBoundary>
             <SequenceViz
               title={"Chain 2"}

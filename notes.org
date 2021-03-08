@@ -10,6 +10,7 @@
    chain 1: MKGARVLVL
    chain 2: MRGALLVLA
 *** How to know which residue to highlight onClick?
+** TODO What's an ambiguity?
 
 * Here's the information I'd need:
 ** Sequence for each chain

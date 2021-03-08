@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
 import { Sequence } from "./SequenceViz";
+import { Col, Button } from "react-bootstrap";
 
 type style = "ribbon" | "surface";
 
@@ -91,7 +92,7 @@ export const StructureViz = (props: {
     function updateViewer() {
       if (viewer !== null) {
         if (style === "surface") {
-          viewer.setStyle({}, { sphere: { radius: 3 } });
+          viewer.setStyle({}, { sphere: { radius: 1 } });
           viewer.render();
         } else if (style === "ribbon") {
           viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
@@ -108,12 +109,13 @@ export const StructureViz = (props: {
         borderColor: "white",
         borderStyle: "solid",
         borderWidth: 3,
+        borderRadius: 12,
         display: "flex",
         flexDirection: "column",
-        alignContent: "center",
-        justifyContent: "center",
         padding: 8,
-        minWidth: 500,
+        maxWidth: "100vw",
+        position: "relative",
+        margin: 16
       }}
     >
       <p>Fel d 1 | pdb: {props.pdb}</p>
@@ -126,14 +128,13 @@ export const StructureViz = (props: {
           alignSelf: "center",
         }}
       />
-      <p> Clicked index: {clickedAtom?.resi}</p>
-      <p> Clicked residue: {clickedAtom?.resn}</p>
-      <p> Clicked chain: {clickedAtom?.chain == "A" ? "1" : "2"}</p>
-      <input
-        value="toggle surface/ribbon"
-        type="button"
+      <Button
+        style={{ margin: 8 }}
+        variant="secondary"
         onClick={() => toggleSurfaceRibbon()}
-      />
+      >
+        toggle surface/ribbon
+      </Button>
     </div>
   );
 };
