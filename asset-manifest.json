@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/feld1viz/static/css/main.e84f409d.chunk.css",
-    "main.js": "/feld1viz/static/js/main.48e06be9.chunk.js",
-    "main.js.map": "/feld1viz/static/js/main.48e06be9.chunk.js.map",
+    "main.js": "/feld1viz/static/js/main.35bab743.chunk.js",
+    "main.js.map": "/feld1viz/static/js/main.35bab743.chunk.js.map",
     "runtime-main.js": "/feld1viz/static/js/runtime-main.4514db94.js",
     "runtime-main.js.map": "/feld1viz/static/js/runtime-main.4514db94.js.map",
     "static/css/2.5c573378.chunk.css": "/feld1viz/static/css/2.5c573378.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.5c573378.chunk.css",
     "static/js/2.9249e616.chunk.js",
     "static/css/main.e84f409d.chunk.css",
-    "static/js/main.48e06be9.chunk.js"
+    "static/js/main.35bab743.chunk.js"
   ]
 }
