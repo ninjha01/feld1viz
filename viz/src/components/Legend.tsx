@@ -13,6 +13,7 @@ export const Legend = () => {
         padding: 8,
         position: "relative",
         margin: 16,
+      fontSize: "calc(10px + 1vmin)"
       }}
     >
       <h3

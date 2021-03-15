@@ -48,17 +48,22 @@ export const SequenceViz = (props: {
 
   const modal = () => {
     const modalStyle = {
-      backgroundColor: colors.modalBackground,
+      backgroundColor: colors.blue,
+      borderColor: colors.blue,
+      borderStyle: "dotted",
       color: colors.white,
       borderRadius: 12,
       padding: 8,
       margin: 16,
-      fontSize: 16,
+      fontSize: "calc(10px + 2vmin)",
       textAlign: "left" as "left",
     };
     if (modalText) {
       return (
         <div style={modalStyle} className={"FadeIn"}>
+          <div style={{ textAlign: "center" }}>
+            <h4>Variant Info</h4>
+          </div>
           <ul>
             {modalText.map((x) => {
               return <li>{x}</li>;
@@ -130,7 +135,7 @@ export const SequenceViz = (props: {
           style={{
             cursor: "pointer",
             fontFamily: "monospace",
-            fontSize: 32,
+            fontSize: "calc(10px + 2vmin)",
             background: `-webkit-linear-gradient(${textColor}, ${textColor})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -150,7 +155,6 @@ export const SequenceViz = (props: {
       <div
         style={{
           wordWrap: "break-word",
-          maxWidth: "100vw",
           margin: 16,
           textAlign: "left",
         }}
@@ -167,7 +171,6 @@ export const SequenceViz = (props: {
         borderStyle: "solid",
         borderWidth: 3,
         borderRadius: 12,
-        maxWidth: "100vw",
         paddingTop: 8,
       }}
     >

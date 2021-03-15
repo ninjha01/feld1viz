@@ -36,7 +36,7 @@ const App = () => {
   return (
     <Container className="App">
       <Row
-        style={{ padding: 16, width: "100vw", alignSelf: "center" }}
+        style={{ width: "100vw", alignSelf: "center" }}
         className="align-items-center"
       >
         <Col sm={12} lg={6}>
