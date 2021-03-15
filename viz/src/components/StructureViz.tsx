@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
 import { Sequence } from "./SequenceViz";
-import { Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { colors } from "../colors";
 
 type style = "ribbon" | "surface";
 
@@ -22,7 +23,7 @@ export const StructureViz = (props: {
 
   useEffect(
     function initializeViewer() {
-      const config = { backgroundColor: "#282c34" };
+      const config = { backgroundColor: colors.background };
       const _viewer = $3Dmol.createViewer(
         structureId.current,
         config
@@ -75,7 +76,7 @@ export const StructureViz = (props: {
             viewer.zoomTo(atom, 100);
           }
         );
-        viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
+        viewer.setStyle({}, { cartoon: { color: "spectrum" } });
 
         viewer.render();
       }
@@ -92,10 +93,13 @@ export const StructureViz = (props: {
     function updateViewer() {
       if (viewer !== null) {
         if (style === "surface") {
-          viewer.setStyle({}, { sphere: { radius: 1 } });
+          viewer.setStyle(
+            {},
+            { sphere: { radius: 1, colorscheme: "shapely" } }
+          );
           viewer.render();
         } else if (style === "ribbon") {
-          viewer.setStyle({}, { cartoon: { color: "spectrum", arrows: true } });
+          viewer.setStyle({}, { cartoon: { colorscheme: "shapely" } });
           viewer.render();
         }
       }
@@ -114,7 +118,7 @@ export const StructureViz = (props: {
         flexDirection: "column",
         padding: 8,
         position: "relative",
-        margin: 16
+        margin: 16,
       }}
     >
       <p>Fel d 1 | pdb: {props.pdb}</p>

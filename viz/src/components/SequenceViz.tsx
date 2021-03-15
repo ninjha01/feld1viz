@@ -67,8 +67,18 @@ export const SequenceViz = (props: {
         setSelectedResidue(r);
         if (sequence && v) {
           const corVars: number[] = v.correlated_ids
-            .map((i) => sequence.variants.find((x) => x.id == i)!.indices)
+            .map((i) => {
+              const correlatedIndices = sequence.variants.find((x) => x.id == i)
+                ?.indices;
+              if (correlatedIndices) {
+                return correlatedIndices;
+              } else {
+                console.log("Couldn't find correlated indices for", r, v);
+                return [];
+              }
+            })
             .flat();
+
           setCorrelated(corVars);
         } else {
           setCorrelated(undefined);
