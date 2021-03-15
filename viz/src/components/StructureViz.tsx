@@ -74,8 +74,8 @@ export const StructureViz = (props: {
             title: CA.resn,
             style: {
               position: { x: CA.x, y: CA.y, z: CA.z },
-              backgroundColor: colors.orange,
-              backgroundOpacity: 0.8,
+              backgroundColor: colors.red,
+              backgroundOpacity: 1,
             },
           },
         ];
