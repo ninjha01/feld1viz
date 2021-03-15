@@ -183,7 +183,10 @@ export const SequenceViz = (props: {
           name="radio"
           value={"domestic"}
           checked={variantType === "domestic"}
-          onChange={(_) => setVariantType("domestic")}
+          onChange={(_) => {
+            setSelectedResidue(null);
+            setVariantType("domestic");
+          }}
         >
           Domestic
         </ToggleButton>
@@ -193,7 +196,10 @@ export const SequenceViz = (props: {
           name="radio"
           value={"exotic"}
           checked={variantType === "exotic"}
-          onChange={(_) => setVariantType("exotic")}
+          onChange={(_) => {
+            setSelectedResidue(null);
+            setVariantType("exotic");
+          }}
         >
           Exotic
         </ToggleButton>
