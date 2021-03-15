@@ -54,10 +54,11 @@ export const SequenceViz = (props: {
       color: colors.white,
       borderRadius: 12,
       padding: 8,
-      marginBottom: 16,
+      marginLeft: 8,
+      marginRight: 8,
+      marginBottom: 8,
       fontSize: "calc(10px + 0.5vmin)",
       textAlign: "left" as "left",
-      minWidth: 600,
     };
     if (modalText) {
       return (
@@ -206,7 +207,7 @@ export const SequenceViz = (props: {
       </ButtonGroup>
 
       {clickableSequence(props.sequence)}
-      <div style={{ display: "inline-block" }}>{modal()}</div>
+      {modal()}
     </div>
   );
 };
