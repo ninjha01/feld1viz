@@ -113,7 +113,7 @@ export const SequenceViz = (props: {
       correlatedIds: number[]
     ) => {
       if (correlatedIds.includes(r.resi)) {
-        return colors.green;
+        return colors.yellow;
       }
       const isSelected = selectedResidue?.resi === r.resi;
       let textColor = isSelected ? colors.red : colors.white;

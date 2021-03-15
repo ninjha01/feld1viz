@@ -25,7 +25,7 @@ export const Legend = () => {
           Variants are in <span style={{ color: colors.blue }}> blue </span>. Use the toggle to switch between Domestic and Exotic Variants.
         </p>
         <p>
-          Click on a variant to show stats. Correlated variants are shown in <span style={{ color: colors.green }}> green </span>
+          Click on a variant to show stats. Correlated variants are shown in <span style={{ color: colors.yellow }}> yellow </span>
         </p>
         <p>
           CRISPR Cut sites are underlined in <span style={{ color: colors.orange }}> orange </span>

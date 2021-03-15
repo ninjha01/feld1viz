@@ -3,6 +3,7 @@ export const colors = {
     green: "#2a9d8f",
     red: "red",
     white: "white",
+    yellow: "#e9c46a",
     orange: "#f4a261",
     background: "#282c34", 	// matches App.css
     modalBackground: "#6c757d"
