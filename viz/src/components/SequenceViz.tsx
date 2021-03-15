@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { AtomSel } from "./3DmolTypes";
-import { Col, Button } from "react-bootstrap";
+import { ToggleButton, ButtonGroup } from "react-bootstrap";
 import { colors } from "../colors";
 
 type Residue = AtomSel;
@@ -19,19 +19,27 @@ export interface Sequence {
   conservedRegions: number[];
 }
 
+export interface cutSites {
+  indices: number[];
+}
+
 export const SequenceViz = (props: {
   title: string;
   sequence: Sequence;
   clickCallback: (r: Residue) => void;
   clicked: Residue | null;
+  cutsites: cutSites;
 }) => {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
   const [modalText, setModalText] = useState<string[] | null>(null);
   const [correlated, setCorrelated] = useState<number[] | undefined>(undefined);
+  const [variantType, setVariantType] = useState<"domestic" | "exotic">(
+    "domestic"
+  );
   const getVariants = (residue: Residue): Variant[] => {
     const variants = new Set<Variant>();
     props.sequence.variants.forEach((v) => {
-      if (v.indices.includes(residue.resi)) {
+      if (variantType === v.variant_type && v.indices.includes(residue.resi)) {
         variants.add(v);
       }
     });
@@ -40,8 +48,8 @@ export const SequenceViz = (props: {
 
   const modal = () => {
     const modalStyle = {
-      backgroundColor: "#6c757d",
-      color: "#fff",
+      backgroundColor: colors.modalBackground,
+      color: colors.white,
       borderRadius: 12,
       padding: 8,
       margin: 16,
@@ -68,8 +76,9 @@ export const SequenceViz = (props: {
         if (sequence && v) {
           const corVars: number[] = v.correlated_ids
             .map((i) => {
-              const correlatedIndices = sequence.variants.find((x) => x.id == i)
-                ?.indices;
+              const correlatedIndices = sequence.variants.find(
+                (x) => x.id === i
+              )?.indices;
               if (correlatedIndices) {
                 return correlatedIndices;
               } else {
@@ -92,44 +101,29 @@ export const SequenceViz = (props: {
       };
     };
 
-    const getColors = (
+    const getTextColor = (
       r: Residue,
       variants: Variant[],
       correlatedIds: number[]
     ) => {
       if (correlatedIds.includes(r.resi)) {
-        return { primaryColor: colors.blue, secondaryColor: colors.blue };
+        return colors.blue;
       }
       const isSelected = selectedResidue?.resi === r.resi;
-      let primaryColor = isSelected ? colors.red : colors.white;
-      let secondaryColor = isSelected ? colors.red : colors.white;
+      let textColor = isSelected ? colors.red : colors.white;
       const variant_types = variants.map((v) => v.variant_type);
       if (!isSelected) {
         if (variant_types.includes("domestic")) {
-          secondaryColor = colors.green; // Green
-        }
-        if (variant_types.includes("exotic")) {
-          secondaryColor = "orange";
-        }
-        if (
-          variant_types.includes("domestic") &&
-          variant_types.includes("exotic")
-        ) {
-          primaryColor = colors.green; // Green
-          secondaryColor = "orange";
+          textColor = colors.green;
         }
       }
-      return { primaryColor, secondaryColor };
+      return textColor;
     };
 
     const renderResidue = (r: Residue) => {
       const variants = getVariants(r);
       const correlatedIds = correlated ? correlated : [];
-      const { primaryColor, secondaryColor } = getColors(
-        r,
-        variants,
-        correlatedIds
-      );
+      const textColor = getTextColor(r, variants, correlatedIds);
       const relevantVariant = variants.values().next().value; // use first variant
       return (
         <span
@@ -137,11 +131,14 @@ export const SequenceViz = (props: {
             cursor: "pointer",
             fontFamily: "monospace",
             fontSize: 32,
-            background: `-webkit-linear-gradient(${primaryColor}, ${secondaryColor})`,
+            background: `-webkit-linear-gradient(${textColor}, ${textColor})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            textDecoration: props.cutsites.indices.includes(r.resi)
+              ? `underline dotted ${colors.orange}`
+              : "initial",
           }}
-          key={r.resi + primaryColor}
+          key={r.resi + textColor}
           onClick={genOnClick(r, relevantVariant)}
         >
           {r.resn}
@@ -171,9 +168,33 @@ export const SequenceViz = (props: {
         borderWidth: 3,
         borderRadius: 12,
         maxWidth: "100vw",
+        paddingTop: 8,
       }}
     >
       <h3>{props.title}</h3>
+      <ButtonGroup toggle size="sm">
+        <ToggleButton
+          type="radio"
+          variant="outline-info"
+          name="radio"
+          value={"domestic"}
+          checked={variantType === "domestic"}
+          onChange={(_) => setVariantType("domestic")}
+        >
+          Domestic
+        </ToggleButton>
+        <ToggleButton
+          type="radio"
+          variant="outline-info"
+          name="radio"
+          value={"exotic"}
+          checked={variantType === "exotic"}
+          onChange={(_) => setVariantType("exotic")}
+        >
+          Exotic
+        </ToggleButton>
+      </ButtonGroup>
+
       {clickableSequence(props.sequence)}
       {modal()}
     </div>

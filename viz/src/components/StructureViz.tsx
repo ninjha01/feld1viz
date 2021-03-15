@@ -7,6 +7,8 @@ import { Button } from "react-bootstrap";
 import { colors } from "../colors";
 
 type style = "ribbon" | "surface";
+const ribbonStyle = { cartoon: { colorscheme: "shapely" } };
+const surfaceStyle = { sphere: { radius: 1, colorscheme: "shapely" } };
 
 export const StructureViz = (props: {
   pdb: string;
@@ -17,6 +19,7 @@ export const StructureViz = (props: {
 }) => {
   const [style, setStyle] = useState<style>("ribbon");
   const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
+  const [previousLabels, setPreviousLabels] = useState<any[]>([]);
   const structureId = useRef("structureId");
 
   const [viewer, setViewer] = useState<Viewer | null>(null);
@@ -46,18 +49,45 @@ export const StructureViz = (props: {
   useEffect(
     function zoomToSelection() {
       if (viewer !== null && clickedAtom != null) {
-        if (clickedAtom.chain === "A") {
-          props.clickCallback(props.chain1_sequence.residues[clickedAtom.resi]);
+        const CA = (clickedAtom as unknown) as {
+          resn: string;
+          x: number;
+          y: number;
+          z: number;
+        };
+        /* if (clickedAtom.chain === "A") {
+         *   props.clickCallback(props.chain1_sequence.residues[clickedAtom.resi]);
+         * }
+         * if (clickedAtom.chain === "B") {
+         *   props.clickCallback(props.chain2_sequence.residues[clickedAtom.rsesi]);
+         * } */
+        if (previousLabels) {
+          previousLabels.forEach((x) => {
+            console.log("removing", x);
+            viewer.removeLabel(x);
+          });
+          viewer.render();
         }
-        if (clickedAtom.chain === "B") {
-          props.clickCallback(props.chain2_sequence.residues[clickedAtom.resi]);
-        }
-        viewer.zoomTo(
+        console.log("adding label");
+        const labels = [
           {
-            resi: clickedAtom.resi,
-          } as AtomSel /* HACK: actually implement zoom correctly */,
-          1000
-        );
+            title: CA.resn,
+            style: {
+              position: { x: CA.x, y: CA.y, z: CA.z },
+              backgroundColor: colors.orange,
+              backgroundOpacity: 0.8,
+            },
+          },
+        ];
+        setPreviousLabels(labels.map((l) => viewer.addLabel(l.title, l.style)));
+        viewer.render();
+        /* 
+	   viewer.zoomTo(
+	   {
+	   resi: clickedAtom.resi,
+	   } as AtomSel /* HACK: actually implement zoom correctly *,
+           1000
+	   ); */
       }
     },
     [props.clickCallback, clickedAtom, viewer]
@@ -71,12 +101,10 @@ export const StructureViz = (props: {
           {},
           true,
           (atom: AtomSel, _: any, __: any, ___: any) => {
-            /* setClickedAtom(atom); */
-            debugger;
-            viewer.zoomTo(atom, 100);
+            setClickedAtom(atom);
           }
         );
-        viewer.setStyle({}, { cartoon: { color: "spectrum" } });
+        viewer.setStyle({}, ribbonStyle);
 
         viewer.render();
       }
@@ -93,13 +121,10 @@ export const StructureViz = (props: {
     function updateViewer() {
       if (viewer !== null) {
         if (style === "surface") {
-          viewer.setStyle(
-            {},
-            { sphere: { radius: 1, colorscheme: "shapely" } }
-          );
+          viewer.setStyle({}, surfaceStyle);
           viewer.render();
         } else if (style === "ribbon") {
-          viewer.setStyle({}, { cartoon: { colorscheme: "shapely" } });
+          viewer.setStyle({}, ribbonStyle);
           viewer.render();
         }
       }

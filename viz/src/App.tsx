@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import "./App.css";
 
 import { Container, Row, Col } from "react-bootstrap";
-import { assert, ErrorBoundary } from "./utils"
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { assert, ErrorBoundary } from "./utils";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { StructureViz } from "./components/StructureViz";
 import { SequenceViz } from "./components/SequenceViz";
 import { AtomSel } from "./components/3DmolTypes";
 import { Legend } from "./components/Legend";
 import { chain1_sequence, chain2_sequence } from "./sequence";
-
 
 const App = () => {
   const [clickedSelection1, setClickedSelection1] = useState<AtomSel | null>(
@@ -25,7 +23,7 @@ const App = () => {
   );
   const atomClicked = (r: AtomSel) => {
     setClickedToDisplay(r);
-    assert(r != null, "Selection is null")
+    assert(r != null, "Selection is null");
     if (r.chain === "A") {
       setClickedSelection1(r);
       setClickedSelection2(null);
@@ -37,7 +35,10 @@ const App = () => {
 
   return (
     <Container className="App">
-      <Row style={{ padding: 16, width: "100vw", alignSelf: "center" }} className="align-items-center">
+      <Row
+        style={{ padding: 16, width: "100vw", alignSelf: "center" }}
+        className="align-items-center"
+      >
         <Col sm={12} lg={6}>
           <ErrorBoundary>
             <StructureViz
@@ -49,7 +50,7 @@ const App = () => {
             />
           </ErrorBoundary>
         </Col>
-        <Col sm={12} lg={6} >
+        <Col sm={12} lg={6}>
           <ErrorBoundary>
             <Legend />
           </ErrorBoundary>
@@ -59,6 +60,7 @@ const App = () => {
               sequence={chain1_sequence}
               clickCallback={atomClicked}
               clicked={clickedSelection1}
+              cutsites={{ indices: [20, 21, 26, 27, 28, 45] }}
             />
           </ErrorBoundary>
           <br />
@@ -68,6 +70,7 @@ const App = () => {
               sequence={chain2_sequence}
               clickCallback={atomClicked}
               clicked={clickedSelection2}
+              cutsites={{ indices: [0, 1, 9] }}
             />
           </ErrorBoundary>
         </Col>
