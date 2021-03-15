@@ -48,15 +48,16 @@ export const SequenceViz = (props: {
 
   const modal = () => {
     const modalStyle = {
-      backgroundColor: colors.blue,
+      backgroundColor: colors.background,
       borderColor: colors.blue,
       borderStyle: "dotted",
       color: colors.white,
       borderRadius: 12,
       padding: 8,
-      margin: 16,
-      fontSize: "calc(10px + 2vmin)",
+      marginBottom: 16,
+      fontSize: "calc(10px + 0.5vmin)",
       textAlign: "left" as "left",
+      minWidth: 600,
     };
     if (modalText) {
       return (
@@ -199,7 +200,7 @@ export const SequenceViz = (props: {
       </ButtonGroup>
 
       {clickableSequence(props.sequence)}
-      {modal()}
+      <div style={{ display: "inline-block" }}>{modal()}</div>
     </div>
   );
 };
