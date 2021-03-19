@@ -15,7 +15,7 @@ export interface Viewer {
   addBox: (box: { center: any; dimensions: any }) => any;
   removeShape: (x: any) => void;
   addShape: (x: any) => any;
-  addLabel: (title: string, style: any, sel: AtomSel | AtomSel[]) => any;
+  addLabel: (title: string, style: any, sel?: AtomSel | AtomSel[]) => any;
   removeLabel: (x: any) => void;
   removeAllLabels: () => void;
   selectedAtoms: (sel: AtomSel) => any;

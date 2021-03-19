@@ -68,14 +68,17 @@ export const StructureViz = (props: {
           {
             title: clickedSel[0].resn,
             style: {
+              position: {
+                x: clickedSel[0].x,
+                y: clickedSel[0].y,
+                z: clickedSel[0].z,
+              },
               backgroundColor: colors.red,
               backgroundOpacity: 1,
             },
           },
         ];
-        setPreviousLabels(
-          labels.map((l) => viewer.addLabel(l.title, l.style, clickedSel))
-        );
+        setPreviousLabels(labels.map((l) => viewer.addLabel(l.title, l.style)));
         viewer.render();
       }
     },
