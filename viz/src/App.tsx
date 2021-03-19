@@ -9,7 +9,8 @@ import { StructureViz } from "./components/StructureViz";
 import { SequenceViz } from "./components/SequenceViz";
 import { AtomSel } from "./components/3DmolTypes";
 import { Legend } from "./components/Legend";
-import { chain1_sequence, chain2_sequence } from "./sequence";
+import { chain1_sequence } from "./sequence1";
+import { chain2_sequence } from "./sequence2";
 
 const App = () => {
   const [clickedSelection1, setClickedSelection1] = useState<AtomSel | null>(

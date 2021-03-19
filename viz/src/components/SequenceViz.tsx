@@ -118,9 +118,8 @@ export const SequenceViz = (props: {
       }
       const isSelected = selectedResidue?.resi === r.resi;
       let textColor = isSelected ? colors.red : colors.white;
-      const variant_types = variants.map((v) => v.variant_type);
       if (!isSelected) {
-        if (variant_types.includes("domestic")) {
+        if (variants.length > 0) {
           textColor = colors.blue;
         }
       }
