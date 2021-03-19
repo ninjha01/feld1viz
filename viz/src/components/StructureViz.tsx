@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
-import { Residue, Sequence } from "./SequenceViz";
+import { Residue } from "./SequenceViz";
 import { Button } from "react-bootstrap";
 import { colors } from "../colors";
 
@@ -46,7 +46,6 @@ export const StructureViz = (props: {
           chain: props.clicked.chain,
         });
         if (matchingAtoms.length > 0) {
-          console.log("setting", matchingAtoms);
           setClickedAtom(matchingAtoms);
         } else {
           console.log("couldn't find matching atoms");
@@ -63,7 +62,6 @@ export const StructureViz = (props: {
           viewer.removeAllLabels();
           viewer.render();
         }
-        console.log(clickedSel);
         const labels = [
           {
             title: clickedSel[0].resn,

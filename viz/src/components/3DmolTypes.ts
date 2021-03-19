@@ -19,6 +19,7 @@ export interface Viewer {
   removeLabel: (x: any) => void;
   removeAllLabels: () => void;
   selectedAtoms: (sel: AtomSel) => any;
+  rotate: (degrees: number, axis: string, duration?: number) => void;
 }
 
 export interface AtomSel {

@@ -6,17 +6,14 @@ import { ErrorBoundary } from "./utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { StructureViz } from "./components/StructureViz";
-import { Residue, SequenceViz } from "./components/SequenceViz";
+import { SequenceViz } from "./components/SequenceViz";
 import { Legend } from "./components/Legend";
 import { chain1_sequence } from "./sequence1";
 import { chain2_sequence } from "./sequence2";
-import { pdb_sequence } from "./pdb_sequence";
 import { AtomSel } from "./components/3DmolTypes";
 
 const App = () => {
-  const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(
-    null
-  );
+  const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
 
   return (
     <Container className="App">
@@ -26,10 +23,7 @@ const App = () => {
       >
         <Col sm={12} lg={6}>
           <ErrorBoundary>
-            <StructureViz
-              pdb={"2EJN"}
-              clicked={clickedAtom}
-            />
+            <StructureViz pdb={"2EJN"} clicked={clickedAtom} />
           </ErrorBoundary>
         </Col>
         <Col sm={12} lg={6}>
