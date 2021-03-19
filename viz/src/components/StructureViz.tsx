@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
-import { Sequence } from "./SequenceViz";
+import { Residue, Sequence } from "./SequenceViz";
 import { Button } from "react-bootstrap";
 import { colors } from "../colors";
 
@@ -12,17 +12,14 @@ const surfaceStyle = { sphere: { radius: 1, colorscheme: "shapely" } };
 
 export const StructureViz = (props: {
   pdb: string;
-  clickCallback: (a: AtomSel) => void;
-  clicked: AtomSel | null;
-  chain1_sequence: Sequence;
-  chain2_sequence: Sequence;
+  clicked: Residue | null;
 }) => {
   const [style, setStyle] = useState<style>("ribbon");
-  const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(null);
   const [previousLabels, setPreviousLabels] = useState<any[]>([]);
-  const structureId = useRef("structureId");
-
   const [viewer, setViewer] = useState<Viewer | null>(null);
+  const [clickedSel, setClickedAtom] = useState<AtomSel[] | null>(null);
+
+  const structureId = useRef("structureId");
 
   useEffect(
     function initializeViewer() {
@@ -40,57 +37,49 @@ export const StructureViz = (props: {
     [structureId]
   );
 
-  useEffect(() => {
-    if (props.clicked) {
-      setClickedAtom(props.clicked);
-    }
-  }, [props.clicked]);
+  useEffect(
+    function findClickedAtomByIdx() {
+      if (props.clicked && props.clicked.structureIndex) {
+        const matchingAtoms = viewer?.selectedAtoms({
+          resi: props.clicked.structureIndex,
+          resn: AACodeMap.get(props.clicked.resn)!,
+          chain: props.clicked.chain,
+        });
+        if (matchingAtoms.length > 0) {
+          console.log("setting", matchingAtoms);
+          setClickedAtom(matchingAtoms);
+        } else {
+          console.log("couldn't find matching atoms");
+        }
+      }
+    },
+    [viewer, props.clicked]
+  );
 
   useEffect(
     function zoomToSelection() {
-      if (viewer !== null && clickedAtom != null) {
-        const CA = (clickedAtom as unknown) as {
-          resn: string;
-          x: number;
-          y: number;
-          z: number;
-        };
-        /* if (clickedAtom.chain === "A") {
-         *   props.clickCallback(props.chain1_sequence.residues[clickedAtom.resi]);
-         * }
-         * if (clickedAtom.chain === "B") {
-         *   props.clickCallback(props.chain2_sequence.residues[clickedAtom.rsesi]);
-         * } */
+      if (viewer !== null && clickedSel != null) {
         if (previousLabels) {
-          previousLabels.forEach((x) => {
-            console.log("removing", x);
-            viewer.removeLabel(x);
-          });
+          viewer.removeAllLabels();
           viewer.render();
         }
-        console.log("adding label");
+        console.log(clickedSel);
         const labels = [
           {
-            title: CA.resn,
+            title: clickedSel[0].resn,
             style: {
-              position: { x: CA.x, y: CA.y, z: CA.z },
               backgroundColor: colors.red,
               backgroundOpacity: 1,
             },
           },
         ];
-        setPreviousLabels(labels.map((l) => viewer.addLabel(l.title, l.style)));
+        setPreviousLabels(
+          labels.map((l) => viewer.addLabel(l.title, l.style, clickedSel))
+        );
         viewer.render();
-        /* 
-	   viewer.zoomTo(
-	   {
-	   resi: clickedAtom.resi,
-	   } as AtomSel /* HACK: actually implement zoom correctly *,
-           1000
-	   ); */
       }
     },
-    [props.clickCallback, clickedAtom, viewer]
+    [clickedSel, viewer]
   );
 
   useEffect(() => {
@@ -101,7 +90,7 @@ export const StructureViz = (props: {
           {},
           true,
           (atom: AtomSel, _: any, __: any, ___: any) => {
-            setClickedAtom(atom);
+            setClickedAtom([atom]);
           }
         );
         viewer.setStyle({}, ribbonStyle);
@@ -166,3 +155,26 @@ export const StructureViz = (props: {
     </div>
   );
 };
+
+const AACodeMap = new Map([
+  ["G", "GLY"],
+  ["P", "PRO"],
+  ["A", "ALA"],
+  ["V", "VAL"],
+  ["L", "LEU"],
+  ["I", "ILE"],
+  ["M", "MET"],
+  ["C", "CYS"],
+  ["F", "PHE"],
+  ["Y", "TYR"],
+  ["W", "TRP"],
+  ["H", "HIS"],
+  ["K", "LYS"],
+  ["R", "ARG"],
+  ["Q", "GLN"],
+  ["N", "ASN"],
+  ["E", "GLU"],
+  ["D", "ASP"],
+  ["S", "SER"],
+  ["T", "THR"],
+]);

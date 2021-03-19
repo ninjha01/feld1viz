@@ -21,6 +21,8 @@ export const Legend = () => {
         Legend
       </h3>
       <div style={{ textAlign: "left", padding: 8 }}>
+	<p> Residues that can be mapped to the structure are in <strong> white </strong>. Residues that cannot are in <span style={{color: colors.grey}}> grey </span>.
+	</p>
         <p>
           Variants are in <span style={{ color: colors.blue }}> blue </span>. Use the toggle to switch between Domestic and Exotic Variants.
         </p>

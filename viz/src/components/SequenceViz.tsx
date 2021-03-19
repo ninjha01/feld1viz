@@ -3,7 +3,12 @@ import { AtomSel } from "./3DmolTypes";
 import { ToggleButton, ButtonGroup } from "react-bootstrap";
 import { colors } from "../colors";
 
-type Residue = AtomSel;
+export interface Residue {
+  resi: number;
+  resn: string;
+  chain: string;
+  structureIndex?: number;
+}
 
 interface Variant {
   id: number;
@@ -26,8 +31,7 @@ export interface cutSites {
 export const SequenceViz = (props: {
   title: string;
   sequence: Sequence;
-  clickCallback: (r: Residue) => void;
-  clicked: Residue | null;
+  clickCallback: (a: AtomSel) => void;
   cutsites: cutSites;
 }) => {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
@@ -99,7 +103,9 @@ export const SequenceViz = (props: {
         } else {
           setCorrelated(undefined);
         }
-        /* props.clickCallback(r); */
+        if (r.structureIndex) {
+          props.clickCallback(r);
+        }
         if (v) {
           setModalText(v.stats);
         } else {
@@ -117,13 +123,16 @@ export const SequenceViz = (props: {
         return colors.yellow;
       }
       const isSelected = selectedResidue?.resi === r.resi;
-      let textColor = isSelected ? colors.red : colors.white;
-      if (!isSelected) {
-        if (variants.length > 0) {
-          textColor = colors.blue;
-        }
+      if (isSelected) {
+        return colors.red;
       }
-      return textColor;
+      if (variants.length > 0) {
+        return colors.blue;
+      }
+      if (r.structureIndex) {
+        return colors.white;
+      }
+      return colors.grey;
     };
 
     const renderResidue = (r: Residue) => {

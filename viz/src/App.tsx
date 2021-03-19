@@ -2,37 +2,21 @@ import React, { useState } from "react";
 import "./App.css";
 
 import { Container, Row, Col } from "react-bootstrap";
-import { assert, ErrorBoundary } from "./utils";
+import { ErrorBoundary } from "./utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { StructureViz } from "./components/StructureViz";
-import { SequenceViz } from "./components/SequenceViz";
-import { AtomSel } from "./components/3DmolTypes";
+import { Residue, SequenceViz } from "./components/SequenceViz";
 import { Legend } from "./components/Legend";
 import { chain1_sequence } from "./sequence1";
 import { chain2_sequence } from "./sequence2";
+import { pdb_sequence } from "./pdb_sequence";
+import { AtomSel } from "./components/3DmolTypes";
 
 const App = () => {
-  const [clickedSelection1, setClickedSelection1] = useState<AtomSel | null>(
+  const [clickedAtom, setClickedAtom] = useState<AtomSel | null>(
     null
   );
-  const [clickedSelection2, setClickedSelection2] = useState<AtomSel | null>(
-    null
-  );
-  const [clickedToDisplay, setClickedToDisplay] = useState<AtomSel | null>(
-    null
-  );
-  const atomClicked = (r: AtomSel) => {
-    setClickedToDisplay(r);
-    assert(r != null, "Selection is null");
-    if (r.chain === "A") {
-      setClickedSelection1(r);
-      setClickedSelection2(null);
-    } else {
-      setClickedSelection1(null);
-      setClickedSelection2(r);
-    }
-  };
 
   return (
     <Container className="App">
@@ -44,10 +28,7 @@ const App = () => {
           <ErrorBoundary>
             <StructureViz
               pdb={"2EJN"}
-              clickCallback={atomClicked}
-              clicked={clickedToDisplay}
-              chain1_sequence={chain1_sequence}
-              chain2_sequence={chain2_sequence}
+              clicked={clickedAtom}
             />
           </ErrorBoundary>
         </Col>
@@ -59,8 +40,7 @@ const App = () => {
             <SequenceViz
               title={"Chain 1"}
               sequence={chain1_sequence}
-              clickCallback={atomClicked}
-              clicked={clickedSelection1}
+              clickCallback={setClickedAtom}
               cutsites={{ indices: [20, 21, 26, 27, 28, 45] }}
             />
           </ErrorBoundary>
@@ -69,8 +49,7 @@ const App = () => {
             <SequenceViz
               title={"Chain 2"}
               sequence={chain2_sequence}
-              clickCallback={atomClicked}
-              clicked={clickedSelection2}
+              clickCallback={setClickedAtom}
               cutsites={{ indices: [0, 1, 9] }}
             />
           </ErrorBoundary>
