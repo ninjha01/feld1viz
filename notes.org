@@ -1,4 +1,17 @@
 
+* Redesign
+
+** TODO Update accompanying info for each variant (see excel spreadsheet)
+   For example for Arg5, update the variant info to:
+   Residue: Arg5
+   Variant: R  C
+   Variant Frequency: 20% of domestic cats
+   Correlated Variants: 20% of domestic cats encode correlated variants at residues Arg5, Trp18, Lys51, and Leu82
+
+** TODO Underline the conserved target regions for CRISPR editing in the sequences (see excel spreadsheet and figure).
+   Can we make this a selectable toggle so we can also highlight the conserved regions on the structure?
+** TODO Smooth edges of ribbon structure (Anna uses PyMOL for the structures, she can send PSE file if needed)
+  
 * New questions
 ** TODO Explain parsing script and format
 ** TODO What about Ile84, Ser85, Ser86?

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #f8f8ff;
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #101010;
 }
 
 .App-link {

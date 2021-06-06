@@ -4,8 +4,12 @@ export const colors = {
     red: "red",
     white: "white",
     grey: "grey",
+    light_grey: "#A0A0A0",
+    light_pink: "pink",
+    dark_grey: "#303030",
     yellow: "#e9c46a",
     orange: "#f4a261",
-    background: "#282c34", 	// matches App.css
-    modalBackground: "#6c757d"
+    background: "#f8f8ff", 	// matches App.background-color in App.css
+    modalBackground: "#6c757d",
+    black: "#A9A9A9",
 }

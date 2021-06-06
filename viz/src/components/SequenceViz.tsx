@@ -10,12 +10,14 @@ export interface Residue {
   structureIndex?: number;
 }
 
-interface Variant {
+export interface Variant {
   id: number;
   indices: number[];
   stats: string[];
   variant_type: "domestic" | "exotic";
   correlated_ids: number[];
+  color: string;
+  chain: "A" | "B";
 }
 
 export interface Sequence {
@@ -31,7 +33,7 @@ export interface cutSites {
 export const SequenceViz = (props: {
   title: string;
   sequence: Sequence;
-  clickCallback: (a: AtomSel) => void;
+  clickCallback: (a: Residue) => void;
   cutsites: cutSites;
 }) => {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
@@ -55,7 +57,7 @@ export const SequenceViz = (props: {
       backgroundColor: colors.background,
       borderColor: colors.blue,
       borderStyle: "dotted",
-      color: colors.white,
+      color: colors.black,
       borderRadius: 12,
       padding: 8,
       marginLeft: 8,
@@ -83,6 +85,7 @@ export const SequenceViz = (props: {
   const clickableSequence = (sequence: Sequence) => {
     const genOnClick = (r: Residue, v?: Variant) => {
       return () => {
+        console.log("called", r, v);
         setSelectedResidue(r);
         if (sequence && v) {
           const corVars: number[] = v.correlated_ids
@@ -126,11 +129,14 @@ export const SequenceViz = (props: {
       if (isSelected) {
         return colors.red;
       }
-      if (variants.length > 0) {
+      if (variants.length == 1) {
+        return variants[0].color;
+      }
+      if (variants.length > 1) {
         return colors.blue;
       }
       if (r.structureIndex) {
-        return colors.white;
+        return colors.black;
       }
       return colors.grey;
     };
@@ -141,23 +147,42 @@ export const SequenceViz = (props: {
       const textColor = getTextColor(r, variants, correlatedIds);
       const relevantVariant = variants.values().next().value; // use first variant
       return (
-        <span
-          style={{
-            cursor: "pointer",
-            fontFamily: "monospace",
-            fontSize: "calc(10px + 2vmin)",
-            background: `-webkit-linear-gradient(${textColor}, ${textColor})`,
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textDecoration: props.cutsites.indices.includes(r.resi)
-              ? `underline dotted ${colors.orange}`
-              : "initial",
-          }}
-          key={r.resi + textColor}
-          onClick={genOnClick(r, relevantVariant)}
-        >
-          {r.resn}
-        </span>
+        <>
+          <span
+            style={{
+              cursor: "pointer",
+              fontFamily: "monospace",
+              fontSize: "calc(10px + 2vmin)",
+              background: `-webkit-linear-gradient(${textColor}, ${textColor})`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textDecoration: props.cutsites.indices.includes(r.resi)
+                ? `underline dotted ${colors.orange}`
+                : "initial",
+              position: "relative",
+              top: "-0.5em",
+            }}
+            key={r.resi + textColor}
+            onClick={genOnClick(r, relevantVariant)}
+          >
+            {r.resn}
+          </span>
+          {(r.resi + 1) % 10 == 0 && (
+            <span
+              style={{
+                fontSize: 10,
+                position: "relative",
+                height: 0,
+                overflow: "visible",
+                top: "0.5em",
+                left: "-1em",
+                zIndex: 1,
+              }}
+            >
+              {r.resi + 1}
+            </span>
+          )}
+        </>
       );
     };
 
@@ -177,7 +202,7 @@ export const SequenceViz = (props: {
   return (
     <div
       style={{
-        borderColor: colors.white,
+        borderColor: colors.black,
         borderStyle: "solid",
         borderWidth: 3,
         borderRadius: 12,

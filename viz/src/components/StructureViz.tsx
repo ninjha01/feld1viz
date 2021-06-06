@@ -1,18 +1,20 @@
 import { useState, useEffect, useRef } from "react";
+import { ToggleButton, ButtonGroup } from "react-bootstrap";
+
 // @ts-ignore
 import * as $3Dmol from "3dmol/build/3Dmol-nojquery.js";
 import { AtomSel, Viewer } from "./3DmolTypes";
-import { Residue } from "./SequenceViz";
-import { Button } from "react-bootstrap";
+import { Variant, Residue, Sequence } from "./SequenceViz";
+
 import { colors } from "../colors";
 
 type style = "ribbon" | "surface";
-const ribbonStyle = { cartoon: { colorscheme: "shapely" } };
-const surfaceStyle = { sphere: { radius: 1, colorscheme: "shapely" } };
 
 export const StructureViz = (props: {
   pdb: string;
+  pdb_sequence: Sequence;
   clicked: Residue | null;
+  variants: Variant[];
 }) => {
   const [style, setStyle] = useState<style>("ribbon");
   const [previousLabels, setPreviousLabels] = useState<any[]>([]);
@@ -20,6 +22,21 @@ export const StructureViz = (props: {
   const [clickedSel, setClickedAtom] = useState<AtomSel[] | null>(null);
 
   const structureId = useRef("structureId");
+
+  const colorByStructure = (atom: Residue) => {
+    let color = colors.dark_grey;
+
+    if (atom.chain === "A") {
+      color = colors.light_grey;
+    }
+    if (atom.chain === "B") {
+      color = colors.light_pink;
+    }
+    return color;
+  };
+
+  const ribbonStyle = { cartoon: { colorfunc: colorByStructure } };
+  const surfaceStyle = { sphere: { radius: 1, colorfunc: colorByStructure } };
 
   useEffect(
     function initializeViewer() {
@@ -33,6 +50,7 @@ export const StructureViz = (props: {
       } else {
         alert("Failed to initialize viewer");
       }
+      setStyle("ribbon");
     },
     [structureId]
   );
@@ -46,6 +64,7 @@ export const StructureViz = (props: {
           chain: props.clicked.chain,
         });
         if (matchingAtoms.length > 0) {
+          debugger;
           setClickedAtom(matchingAtoms);
         } else {
           console.log("couldn't find matching atoms");
@@ -94,11 +113,10 @@ export const StructureViz = (props: {
             setClickedAtom([atom]);
           }
         );
-        viewer.setStyle({}, ribbonStyle);
-
-        viewer.render();
+        viewerApplyStyle();
       }
     };
+
     downloadAndViewPdb();
   }, [viewer, props.pdb]);
 
@@ -107,25 +125,40 @@ export const StructureViz = (props: {
     setStyle(next);
   };
 
-  useEffect(
-    function updateViewer() {
-      if (viewer !== null) {
-        if (style === "surface") {
-          viewer.setStyle({}, surfaceStyle);
-          viewer.render();
-        } else if (style === "ribbon") {
-          viewer.setStyle({}, ribbonStyle);
-          viewer.render();
-        }
+  function viewerApplyStyle() {
+    if (viewer !== null) {
+      if (style === "surface") {
+        viewer.setStyle({}, surfaceStyle);
+      } else if (style === "ribbon") {
+        viewer.setStyle({}, ribbonStyle);
       }
-    },
-    [viewer, style]
-  );
+      props.variants.forEach((v) => {
+        const res = props.pdb_sequence.residues[v.indices[0]];
+        let variantStyle = null;
+        if (style === "surface") {
+          variantStyle = { sphere: { radius: 1, colorfunc: () => v.color } };
+        }
+        if (style === "ribbon") {
+          variantStyle = { cartoon: { colorfunc: () => v.color } };
+        }
+        viewer.addStyle(
+          {
+            resi: res.resi,
+            resn: AACodeMap.get(res.resn)!,
+            chain: v.chain,
+          },
+          variantStyle
+        );
+      });
+      viewer.render();
+    }
+  }
+  useEffect(viewerApplyStyle, [viewer, style]);
 
   return (
     <div
       style={{
-        borderColor: "white",
+        borderColor: colors.black,
         borderStyle: "solid",
         borderWidth: 3,
         borderRadius: 12,
@@ -146,13 +179,32 @@ export const StructureViz = (props: {
           alignSelf: "center",
         }}
       />
-      <Button
-        style={{ margin: 16 }}
-        variant="secondary"
-        onClick={() => toggleSurfaceRibbon()}
-      >
-        toggle surface/ribbon
-      </Button>
+      <ButtonGroup toggle size="sm" style={{ margin: 8 }}>
+        <ToggleButton
+          type="radio"
+          variant="outline-info"
+          name="radio"
+          value={"surface"}
+          checked={style === "surface"}
+          onChange={(_) => {
+            toggleSurfaceRibbon();
+          }}
+        >
+          Surface
+        </ToggleButton>
+        <ToggleButton
+          type="radio"
+          variant="outline-info"
+          name="radio"
+          value={"ribbon"}
+          checked={style === "ribbon"}
+          onChange={(_) => {
+            toggleSurfaceRibbon();
+          }}
+        >
+          Ribbon
+        </ToggleButton>
+      </ButtonGroup>
     </div>
   );
 };
