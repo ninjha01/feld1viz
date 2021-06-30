@@ -172,12 +172,12 @@ export const StructureViz = (props: {
         margin: 16,
       }}
     >
-      <p>Fel d 1 | pdb: {props.pdb}</p>
+      <p style={{ textAlign: "center" }}>Fel d 1</p>
       <div
         id={structureId.current}
         style={{
-          minWidth: "40vw",
-          minHeight: "40vw",
+          minWidth: "25vw",
+          minHeight: "25vw",
           position: "relative",
           alignSelf: "center",
         }}

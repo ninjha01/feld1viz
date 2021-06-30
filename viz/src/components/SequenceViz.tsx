@@ -209,7 +209,7 @@ export const SequenceViz = (props: {
         paddingTop: 8,
       }}
     >
-      <h3>{props.title}</h3>
+      <p style={{ textAlign: "center" }}>{props.title}</p>
       <ButtonGroup toggle size="sm">
         <ToggleButton
           type="radio"

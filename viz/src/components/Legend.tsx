@@ -14,6 +14,7 @@ export const Legend = () => {
         position: "relative",
         margin: 16,
         fontSize: "calc(10px + 1vmin)",
+        width: "100%",
       }}
     >
       <h3>Legend</h3>

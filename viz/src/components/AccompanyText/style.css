@@ -1,0 +1,81 @@
+html {
+  line-height: 1.5;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  color: #1a1a1a;
+  background-color: "inherit";
+  width: 100vw
+}
+body {
+    background-color: "inherit";
+  padding: 8px;
+  margin: 0 auto;
+  hyphens: auto;
+  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+p {
+    text-align: left;
+    margin: 1em 0;
+}
+a {
+  color: #1a1a1a;
+}
+a:visited {
+  color: #1a1a1a;
+}
+img {
+  max-width: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1.4em;
+}
+h5,
+h6 {
+  font-size: 1em;
+  font-style: italic;
+}
+h6 {
+  font-weight: normal;
+}
+ol,
+ul {
+  margin-top: 1em;
+}
+li > ol,
+li > ul {
+  margin-top: 0;
+}
+header {
+  margin-bottom: 4em;
+  text-align: center;
+}
+span.smallcaps {
+  font-variant: small-caps;
+}
+span.underline {
+  text-decoration: underline;
+}
+div.column {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+div.hanging-indent {
+  margin-left: 1.5em;
+  text-indent: -1.5em;
+}
+ul.task-list {
+  list-style: none;
+}
+.display.math {
+  display: block;
+  text-align: center;
+  margin: 0.5rem auto;
+}
