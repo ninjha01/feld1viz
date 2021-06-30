@@ -1,0 +1,114 @@
+GenBank Residue:,Structure Residue:,AA:,Conserved:,Variant Color:,Residue:,Variant:,Variant Frequency:
+1,,M,underline,#ffffff,,,
+2,,R,underline,#ffffff,,,
+3,,G,underline,#ffffff,,,
+4,,A,underline,#ffffff,,,
+5,,L,underline,#ffffff,,,
+6,,L,underline,#ffffff,,,
+7,,V,underline,#ffffff,,,
+8,,L,underline,#ffffff,,,
+9,,A,underline,#ffffff,,,
+10,,L,underline,#ffffff,,,
+11,,L,underline,#ffffff,,,
+12,,V,underline,#ffffff,,,
+13,,T,underline,#ffffff,,,
+14,,Q,underline,#ffffff,,,
+15,,A,,#ffff00,Ala15,A → E,44% of domestic cats
+16,,L,underline,#ffffff,,,
+17,,G,underline,#ffffff,,,
+18,71,V,underline,#ffffff,,,
+19,72,K,underline,#ffffff,,,
+20,73,M,underline,#ffffff,,,
+21,74,A,underline,#ffffff,,,
+22,75,E,underline,#ffffff,,,
+23,76,T,underline,#ffffff,,,
+24,77,C,underline,#ffffff,,,
+25,78,P,underline,#ffffff,,,
+26,79,I,underline,#ffffff,,,
+27,80,F,underline,#ffffff,,,
+28,81,Y,underline,#ffffff,,,
+29,82,D,,#d60093,Asp29,D → E,12% of domestic cats
+30,83,V,,#ffffff,,,
+,,,,,,,
+31,84,F,,#ffffff,,,
+33,86,A,,#ffffff,,,
+34,87,V,,#ffffff,,,
+,,,,,,,
+35,88,A,,#ffffff,,,
+36,89,N,,#d60093,Asn36,N → S,34% of domestic cats
+37,90,G,,#ffffff,,,
+38,91,N,,#d60093,Asn38,N → D,14% of domestic cats
+39,92,E,,#ffffff,,,
+40,93,L,,#ffffff,,,
+41,94,L,,#ffffff,,,
+42,95,L,,#ffffff,,,
+43,96,D,,#ffffff,,,
+44,97,L,,#3366ff,Leu44,L → L or F or S,20% of domestic cats
+45,98,S,underline,#ffffff,,,
+46,99,L,underline,#ffffff,,,
+47,100,T,underline,#ffffff,,,
+48,101,K,underline,#ffffff,,,
+49,102,V,underline,#ffffff,,,
+50,103,N,underline,#ffffff,,,
+51,104,A,underline,#ffffff,,,
+52,105,T,underline,#ffffff,,,
+53,106,E,underline,#ffffff,,,
+54,107,P,underline,#ffffff,,,
+55,108,E,underline,#ffffff,,,
+56,109,R,underline,#ffffff,,,
+57,110,T,underline,#ffffff,,,
+58,111,A,underline,#ffffff,,,
+59,112,M,underline,#ffffff,,,
+60,113,K,underline,#ffffff,,,
+61,114,K,underline,#ffffff,,,
+62,115,I,underline,#ffffff,,,
+63,116,Q,underline,#ffffff,,,
+64,117,D,underline,#ffffff,,,
+65,118,C,underline,#ffffff,,,
+66,119,Y,underline,#ffffff,,,
+67,120,V,underline,#ffffff,,,
+68,121,E,underline,#ffffff,,,
+69,122,N,underline,#ffffff,,,
+70,123,G,underline,#ffffff,,,
+71,124,L,underline,#ffffff,,,
+72,125,I,,#ff9933,Ile72,I → L or V,20% of domestic cats
+73,126,S,,#ffffff,,,
+74,127,R,,#65e6e9,Arg74,R → K,66% of domestic cats
+75,128,V,,#65e6e9,Val75,V → F or A or S,"(F) 30% of domestic cats
+(S) 8 % of domestic cats
+(A) 28% of domestic cats"
+76,129,L,,#ffffff,,,
+77,130,D,,#ffffff,,,
+78,131,G,,#3366ff,Gly78,G → A or T or R,"(A) 4% of domestic cats
+(T or R) 32% of domestic cats"
+79,132,L,,#ffffff,,,
+80,133,V,,#ffffff,,,
+81,134,M,,#ffffff,,,
+82,135,T,,#7030a0,Thr82,T → I,64% of domestic cats
+83,136,T,,#7030a0,Thr83,T → A,44% of domestic cats
+84,137,I,,#ffffff,,,
+85,138,S,,#7030a0,Ser85,S → -,42% of domestic cats
+86,139,S,,#7030a0,Ser86,S → -,42% of domestic cats
+87,140,S,,#7030a0,Ser87,S → N,42% of domestic cats
+88,141,K,,#7030a0,Lys88,K → E,10% of domestic cats
+89,142,D,,#7030a0,Asp89,D → Y,16% of domestic cats
+90,143,C,,#ffffff,,,
+91,144,M,,#ffff00,Met91,M → T,30% of domestic cats
+92,145,G,,#ffffff,,,
+93,146,E,,#ffffff,,,
+94,,A,,#ffffff,,,
+95,,V,,#ffffff,,,
+96,,Q,,#ccccff,Gln96,Q → E,34% of domestic cats
+97,,N,,#ffffff,,,
+98,,T,,#ffffff,,,
+99,,V,,#ffffff,,,
+100,,E,,#ffffff,,,
+101,,D,,#ffffff,,,
+102,,L,,#ffffff,,,
+103,,K,,#ffffff,,,
+104,,L,,#ffffff,,,
+105,,N,,#ccccff,Asn105,N → K,34% of domestic cats
+106,,T,,#ffffff,,,
+107,,L,,#ffffff,,,
+108,,G,,#ffffff,,,
+109,,R,,#ffffff,,,

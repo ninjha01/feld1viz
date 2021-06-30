@@ -3,13 +3,13 @@ export const colors = {
     green: "#2a9d8f",
     red: "red",
     white: "white",
-    grey: "grey",
+    grey: "#A9A9A9",
     light_grey: "#A0A0A0",
     light_pink: "pink",
     dark_grey: "#303030",
-    yellow: "#e9c46a",
+    gold: "#e9c46a",
     orange: "#f4a261",
     background: "#f8f8ff", 	// matches App.background-color in App.css
     modalBackground: "#6c757d",
-    black: "#A9A9A9",
+    black: "grey",
 }

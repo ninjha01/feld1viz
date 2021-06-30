@@ -1,0 +1,137 @@
+GenBank Residue:,Structure Residue:,AA:,Variant Color:,Residue:,Variant:,Variant Frequency:,Exotic Cat Species:
+1,,M,#ffffff,,,,
+2,,R,#ffffff,,,,
+3,,G,#ffffff,,,,
+4,,A,#ffffff,,,,
+5,,L,#ffffff,,,,
+6,,L,#ffffff,,,,
+7,,V,#ffffff,,,,
+8,,L,#ffffff,,,,
+9,,A,#65e6e9,Ala9,A → T,12.5% of exotic cats analyzed,Chinese mountain cat
+10,,L,#ffffff,,,,
+11,,L,#ffffff,,,,
+12,,V,#ffffff,,,,
+13,,T,#ffffff,,,,
+14,,Q,#65e6e9,Gln14,Q → R,12.5% of exotic cats analyzed,Cougar
+15,,A,#00b050,Ala15,A → E,75% of exotic cats analyzed,"Cougar, Iberian lynx, African lion, Bengal tiger, leopard cat, fishing cat"
+16,,L,#ffffff,,,,
+17,,G,#ffffff,,,,
+18,71,V,#65e6e9,Val18,V → F,12.5% of exotic cats analyzed,Iberian lynx
+19,72,K,#ffffff,,,,
+20,73,M,#ffffff,,,,
+21,74,A,#ffffff,,,,
+22,75,E,#ffffff,,,,
+23,76,T,#ffffff,,,,
+24,77,C,#ffffff,,,,
+25,78,P,#ffffff,,,,
+26,79,I,#ffffff,,,,
+27,80,F,#ffffff,,,,
+28,81,Y,#ffffff,,,,
+29,82,D,#00b050,Asp29,D → E/H/K/Q,"12.5% of exotic cats analyzed (E)
+25% of exotic cats analyzed (H)
+12.5% of exotic cats analyzed (K)
+12.5% of exotic cats analyzed (Q)","Chinese mountain cat (E)
+Cougar, Bengal tiger (H)
+Black-footed cat (K)
+African lion (Q)"
+30,83,V,#ffffff,,,,
+31,84,F,#ffffff,,,,
+32,85,F,#00b050,Phe32,F → T/N,"87.5% of exotic cats analyzed (T)
+12.5% of exotic cats analyzed (N)","Cougar, black-footed cat, Iberian lynx, African lion, Bengal tiger, leopard cat, fishing cat (T)
+Chinese mountain cat (N)"
+33,86,A,#65e6e9,Ala33,A → V,12.5% of exotic cats analyzed,African lion
+34,87,V,#ffffff,,,,
+35,88,A,#65e6e9,Ala35,A → T,25% of exotic cats analyzed,"African lion, Bengal tiger"
+36,89,N,#00b050,Asn36,N → S/T,"87.5% of exotic cats analyzed (S)
+12.5% of exotic cats analyzed (T)","Cougar, black-footed cat, Chinese mountain cat, Iberian lynx, Bengal tiger, leopard cat, fishing cat (S)
+African lion (T)"
+37,90,G,#ffffff,,,,
+38,91,N,#00b050,Asn38,N → D/S,"37.5% of exotic cats analyzed (D)
+12.5% of exotic cats analyzed (S)","Cougar, black-footed cat, Chinese mountain cat (D)
+Iberian lynx (S)"
+39,92,E,#ffffff,,,,
+40,93,L,#65e6e9,Leu40,L → F,4.2% of exotic cats analyzed (one individual),Cougar
+41,94,L,#65e6e9,Leu41,L → V,12.5% of exotic cats analyzed,Bengal tiger
+42,95,L,#ffffff,,,,
+43,96,D,#ffffff,,,,
+44,97,L,#00b050,Leu44,L → F/S,"62.5% of exotic cats analyzed (F)
+25% of exotic cats analyzed (S)","Black-footed cat, African lion, Bengal tiger, leopard cat, fishing cat (F)
+Cougar, Iberian lynx (S)"
+45,98,S,#65e6e9,Ser45,S → L,25% of exotic cats analyzed,"African lion, Bengal tiger"
+46,99,L,#ffffff,,,,
+47,100,T,#65e6e9,Thr47,T → I,12.5% of exotic cats analyzed,Fishing cat
+48,101,K,#65e6e9,Lys48,K → V/R,"25% of exotic cats analyzed (V)
+12.5% of exotic cats analyzed (R)","African lion, Bengal tiger (V)
+Fishing cat (R)"
+49,102,V,#ffffff,,,,
+50,103,N,#ffffff,,,,
+51,104,A,#ffffff,,,,
+52,105,T,#ffffff,,,,
+53,106,E,#ffffff,,,,
+54,107,P,#ffffff,,,,
+55,108,E,#ffffff,,,,
+56,109,R,#ffffff,,,,
+57,110,T,#ffffff,,,,
+58,111,A,#ffffff,,,,
+59,112,M,#65e6e9,Met59,M → I,12.5% of exotic cats analyzed,Iberian lynx
+60,113,K,#ffffff,,,,
+61,114,K,#ffffff,,,,
+62,115,I,#ffffff,,,,
+63,116,Q,#ffffff,,,,
+64,117,D,#ffffff,,,,
+65,118,C,#ffffff,,,,
+66,119,Y,#ffffff,,,,
+67,120,V,#65e6e9,Val67,V → M,12.5% of exotic cats analyzed,African lion
+68,121,E,#ffffff,,,,
+69,122,N,#ffffff,,,,
+70,123,G,#ffffff,,,,
+71,124,L,#65e6e9,Leu71,L → F,12.5% of exotic cats analyzed,Chinese mountain cat
+72,125,I,#00b050,Ile72,I → L/V/M,"12.5% of exotic cats analyzed (L)
+25% of exotic cats analyzed (V)
+12.5% of exotic cats analyzed (M)
+","Fishing cat (L)
+Black-footed cat, Iberian lynx (V)
+African lion (M)"
+73,126,S,#65e6e9,Ser73,S → A,12.5% of exotic cats analyzed,African lion
+74,127,R,#00b050,Arg74,R → K/T,"75% of exotic cats analyzed (K)
+12.5% of exotic cats analyzed (T)","Cougar, black-footed cat, Chinese mountain cat, African lion, Bengal tiger, leopard cat, fishing cat (K)
+Iberian lynx (T)
+"
+75,128,V,#00b050,Val75,V → F/A/G,"12.5% of exotic cats analyzed (F)
+41.7% of exotic cats analyzed (A)
+12.5% of exotic cats analyzed (G)","Chinese mountain cat (F)
+Cougar, black-footed cat, African lion, leopard cat (A)
+Iberian lynx (G)"
+76,129,L,#ffffff,,,,
+77,130,D,#65e6e9,Asp77,D → V,12.5% of exotic cats analyzed,African lion
+78,131,G,#00b050,Gly78,G → A/T,"62.5% of exotic cats analyzed (A)
+12.5% of exotic cats analyzed (T)","Cougar, Iberian lynx, African lion, leopard cat, fishing cat (A)
+Black-footed cat (T)"
+79,132,L,#65e6e9,Leu79,L → I,25% of exotic cats analyzed,"African lion, Bengal tiger"
+80,133,V,#ffffff,,,,
+81,134,M,#ffffff,,,,
+82,135,T,#00b050,Thr82,T → I/A,"62.5% of exotic cats analyzed (I)
+25% of exotic cats analyzed (A)","Cougar, black-footed cat, Chinese mountain cat, Iberian lynx, leopard cat (T)
+Bengal tiger, fishing cat (A)"
+83,136,T,#00b050,Thr83,T → A,12.5% of exotic cats analyzed,Black-footed cat
+84,137,I,#ffffff,,,,
+85,138,S,#00b050,Ser85,S → -,37.5% of exotic cats analyzed,"Black-footed cat, Chinese mountain cat, fishing cat"
+86,139,S,#00b050,Ser86,S → -/F,"37.5% of exotic cats analyzed (-)
+12.5% of exotic cats analyzed (F)","Black-footed cat, Chinese mountain cat, fishing cat (-)
+African lion (F)"
+87,140,S,#00b050,Ser87,S → N,25% of exotic cats analyzed,"Black-footed cat, Chinese mountain cat"
+88,141,K,#00b050,Lys88,K → E/V,"12.5% of exotic cats analyzed (E)
+12.5% of exotic cats analyzed (V)","Black-footed cat (E)
+Chinese mountain cat (V)"
+89,142,D,#00b050,Asp89,D → V,25% of exotic cats analyzed,"African lion, fishing cat"
+90,143,C,#ffffff,,,,
+91,144,M,#00b050,Met91,M → I,50% of exotic cats analyzed,"Cougar, Iberian lynx, leopard cat, fishing cat"
+92,145,G,#65e6e9,Gly92,G → V/D,"62.5% of exotic cats analyzed (V)
+12.5% of exotic cats analyzed (D)","Cougar, Chinese mountain cat, Iberian lynx, leopard cat, fishing cat (V)
+African lion (D)"
+93,146,E,#ffffff,,,,
+94,,A,#65e6e9,Ala94,A → T,12.5% of exotic cats analyzed,Fishing cat
+95,,V,#65e6e9,Val95,V → A/S,"25% of exotic cats analyzed (A)
+12.5% of exotic cats analyzed (S)","African lion, Bengal tiger (A)
+Fishing cat (S)"
+96,,Q,#00b050,Gln96,Q → E,12.5% of exotic cats analyzed,Black-footed cat

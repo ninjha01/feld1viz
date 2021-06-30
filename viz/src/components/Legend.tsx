@@ -1,4 +1,4 @@
-import { colors } from "../colors"
+import { colors } from "../colors";
 
 export const Legend = () => {
   return (
@@ -13,21 +13,23 @@ export const Legend = () => {
         padding: 8,
         position: "relative",
         margin: 16,
-        fontSize: "calc(10px + 1vmin)"
+        fontSize: "calc(10px + 1vmin)",
       }}
     >
-      <h3
-      >
-        Legend
-      </h3>
+      <h3>Legend</h3>
       <div style={{ textAlign: "left", padding: 8 }}>
-        <p> Residues that can be mapped to the structure are in <strong>white</strong>. Residues that cannot are in <span style={{ color: colors.grey }}>grey</span>.
-	</p>
         <p>
-          Variants are in <span style={{ color: colors.blue }}>blue</span>. Use the toggle to switch between Domestic and Exotic Variants.
+          Residues that can be mapped to the structure are in{" "}
+          <span style={{ color: colors.black }}>dark grey</span>. Residues that
+          cannot are in <span style={{ color: colors.grey }}>light grey</span>.
         </p>
         <p>
-          Click on a variant to show stats. Correlated variants are shown in <span style={{ color: colors.yellow }}>yellow</span>. Currently, this is only supported for variants in domestic cats.
+          Use the toggle to switch between Domestic and Exotic Variants.
+          Correlated variants are in the same color.
+        </p>
+        <p>
+          Click on a variant to show stats. Correlated variants will then be
+          highlighted in <span style={{ color: colors.gold }}>gold</span>.
         </p>
       </div>
     </div>

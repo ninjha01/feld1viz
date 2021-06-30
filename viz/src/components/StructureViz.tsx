@@ -141,6 +141,9 @@ export const StructureViz = (props: {
         if (style === "ribbon") {
           variantStyle = { cartoon: { colorfunc: () => v.color } };
         }
+        if (!res) {
+          debugger;
+        }
         viewer.addStyle(
           {
             resi: res.resi,
