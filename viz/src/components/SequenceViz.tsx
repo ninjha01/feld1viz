@@ -156,8 +156,8 @@ export const SequenceViz = (props: {
               background: `-webkit-linear-gradient(${textColor}, ${textColor})`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textDecoration: props.cutsites.indices.includes(r.resi)
-                ? `underline dotted ${colors.orange}`
+              textDecoration: props.sequence.conservedRegions.includes(r.resi) && variantType == "domestic"
+                ? `underline dotted ${colors.black}`
                 : "initial",
               position: "relative",
               top: "-0.5em",

@@ -25,9 +25,6 @@ const App = () => {
       <Container>
         <Row style={{ width: "100%" }}>
           <AccompanyTopText />
-          <ErrorBoundary>
-            <Legend />
-          </ErrorBoundary>
         </Row>
         <Row style={{ width: "100%" }}>
           <Col sm={12} lg={6}>
