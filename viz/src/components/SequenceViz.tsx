@@ -191,6 +191,7 @@ export const SequenceViz = (props: {
           checked={props.variantType === "domestic"}
           onChange={(_: any) => {
             setSelectedResidue(null);
+            setModalText(null)
             props.setVariantType("domestic");
           }}
         >
@@ -204,6 +205,7 @@ export const SequenceViz = (props: {
           checked={props.variantType === "exotic"}
           onChange={(_: any) => {
             setSelectedResidue(null);
+            setModalText(null)
             props.setVariantType("exotic");
           }}
         >

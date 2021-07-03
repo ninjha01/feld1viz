@@ -100,7 +100,13 @@ export const chain1_sequence: Sequence = {
             color: "#00b050",
             id: 0,
             indices: [4],
-            stats: ["R → C", "20% of domestic cats"],
+            stats: [
+                "Residue: Arg5",
+                "Variant: R → C",
+                "Variant Frequency: 20% of domestic cats",
+                "Correlated Variants: 20% of domestic cats encode variants at residues Arg5, Trp18, Lys51, and Leu82",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -108,7 +114,13 @@ export const chain1_sequence: Sequence = {
             color: "#00b050",
             id: 1,
             indices: [17],
-            stats: ["W → S", "24% of domestic cats"],
+            stats: [
+                "Residue: Trp18",
+                "Variant: W → S",
+                "Variant Frequency: 24% of domestic cats",
+                "Correlated Variants: 20% of domestic cats encode variants at residues Arg5, Trp18, Lys51, and Leu82",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -116,7 +128,12 @@ export const chain1_sequence: Sequence = {
             color: "#000000",
             id: 2,
             indices: [36],
-            stats: ["T → M", "2% of domestic cats (one individual)"],
+            stats: [
+                "Residue: Thr37",
+                "Variant: T → M",
+                "Variant Frequency: 2% of domestic cats (one individual)",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -124,7 +141,12 @@ export const chain1_sequence: Sequence = {
             color: "#000000",
             id: 3,
             indices: [41],
-            stats: ["E → K", "2% of domestic cats (one individual)"],
+            stats: [
+                "Residue: Glu42",
+                "Variant: E → K",
+                "Variant Frequency: 2% of domestic cats (one individual)",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -132,7 +154,13 @@ export const chain1_sequence: Sequence = {
             color: "#00b050",
             id: 4,
             indices: [50],
-            stats: ["K → N", "28% of domestic cats"],
+            stats: [
+                "Residue: Lys51",
+                "Variant: K → N",
+                "Variant Frequency: 28% of domestic cats",
+                "Correlated Variants: 20% of domestic cats encode variants at residues Arg5, Trp18, Lys51, and Leu82",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -140,7 +168,12 @@ export const chain1_sequence: Sequence = {
             color: "#000000",
             id: 5,
             indices: [52],
-            stats: ["L → R", "2% of domestic cats (one individual)"],
+            stats: [
+                "Residue: Leu53",
+                "Variant: L → R",
+                "Variant Frequency: 2% of domestic cats (one individual)",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -148,7 +181,12 @@ export const chain1_sequence: Sequence = {
             color: "#000000",
             id: 6,
             indices: [57],
-            stats: ["E → A", "2% of domestic cats (one individual)"],
+            stats: [
+                "Residue: Glu58",
+                "Variant: E → A",
+                "Variant Frequency: 2% of domestic cats (one individual)",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -156,7 +194,12 @@ export const chain1_sequence: Sequence = {
             color: "#000000",
             id: 7,
             indices: [61],
-            stats: ["I → N", "2% of domestic cats (one individual)"],
+            stats: [
+                "Residue: Ile62",
+                "Variant: I → N",
+                "Variant Frequency: 2% of domestic cats (one individual)",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -164,7 +207,13 @@ export const chain1_sequence: Sequence = {
             color: "#00b050",
             id: 8,
             indices: [81],
-            stats: ["L → V", "26% of domestic cats"],
+            stats: [
+                "Residue: Leu82",
+                "Variant: L → V",
+                "Variant Frequency: 28% of domestic cats",
+                "Correlated Variants: 20% of domestic cats encode variants at residues Arg5, Trp18, Lys51, and Leu82",
+            ],
+
             variant_type: "domestic",
         },
         {
@@ -172,7 +221,11 @@ export const chain1_sequence: Sequence = {
             color: "#000000",
             id: 9,
             indices: [88],
-            stats: ["S → N", "2% of domestic cats (one individual)"],
+            stats: [
+                "Residue: Ser89",
+                "Variant: S → N",
+                "Variant Frequency: 2% of domestic cats (one individual)",
+            ],
             variant_type: "domestic",
         },
         {
@@ -180,7 +233,12 @@ export const chain1_sequence: Sequence = {
             color: "#d60093",
             id: 10,
             indices: [1],
-            stats: ["K → E", "12.5% of exotic cats analyzed", "Species: Cougar"],
+            stats: [
+                "Residue: Lys2",
+                "Variant: K → E",
+                "Variant Frequency: 12.5% of exotic cats analyzed",
+                "Exotic Cat Species: Cougar",
+            ],
             variant_type: "exotic",
         },
         {
@@ -189,11 +247,16 @@ export const chain1_sequence: Sequence = {
             id: 11,
             indices: [4],
             stats: [
-                "R → C or H",
-                "(C) 25% of exotic cats analyzed\n",
+                "Residue: Arg5",
+                "Variant: R → C, H",
+                "Variant Frequency: ",
+                "(C) 25% of exotic cats analyzed",
                 "(H) 12.5% of exotic cats analyzed",
-                "Species: (C) Leopard cat, fishing cat\n(H) Iberian lynx",
+                "Exotic Cat Species:",
+                "(C) Leopard cat, fishing cat",
+                "(H) Iberian lynx",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -202,11 +265,12 @@ export const chain1_sequence: Sequence = {
             id: 12,
             indices: [17],
             stats: [
-                "W → S",
-                "100% of exotic cats analyzed",
-                "Species: Cougar, black-footed cat, Chinese mountain cat, Iberian ",
-                "lynx, African lion, Bengal tiger, leopard cat, fishing cat",
+                "Residue: Trp18",
+                "Variant: W → S",
+                "Variant Frequency: 100% of exotic cats analyzed",
+                "Exotic Cat Species: Cougar, black-footed cat, Chinese mountain cat, Iberian lynx, African lion, Bengal tiger, leopard cat, fishing cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -215,10 +279,12 @@ export const chain1_sequence: Sequence = {
             id: 13,
             indices: [25],
             stats: [
-                "P → S",
-                "50% of exotic cats analyzed",
-                "Species: Cougar, Iberian lynx, African lion, Bengal tiger",
+                "Residue: Pro26",
+                "Variant: P → S",
+                "Variant Frequency: 50% of exotic cats analyzed",
+                "Exotic Cat Species: Cougar, Iberian lynx, African lion, Bengal tiger",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -227,11 +293,16 @@ export const chain1_sequence: Sequence = {
             id: 14,
             indices: [30],
             stats: [
-                "D → I/N",
-                "12.5% of exotic cats analyzed (I)\n",
-                "12.5% of exotic cats analyzed (N)",
-                "Species: African lion(I)\nBengal tiger (N)",
+                "Residue: Asp31",
+                "Variant: D → I, N",
+                "Variant Frequency: ",
+                "(I) 12.5% of exotic cats analyzed",
+                "(N) 12.5% of exotic cats analyzed",
+                "Exotic Cat Species:",
+                "(I) African lion",
+                "(N) Bengal tiger",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -240,13 +311,16 @@ export const chain1_sequence: Sequence = {
             id: 15,
             indices: [50],
             stats: [
-                "K → N/S",
-                "87.5% of exotic cats analyzed (K)\n",
-                "12.5% of exotic cats analyzed (S)",
-                "Species: Cougar, Chinese mountain cat, Iberian lynx, African ",
-                "lion, Bengal tiger, leopard cat, fishing cat (K)\n",
-                "Black-footed cat (S)",
+                "Residue: Lys51",
+                "Variant: K → N, S",
+                "Variant Frequency: ",
+                "(N) 87.5% of exotic cats analyzed",
+                "(S) 12.5% of exotic cats analyzed",
+                "Exotic Cat Species:",
+                "(N) Cougar, Chinese mountain cat, Iberian lynx, African lion, Bengal tiger, leopard cat, fishing cat",
+                "(S) Black-footed cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -255,10 +329,12 @@ export const chain1_sequence: Sequence = {
             id: 16,
             indices: [51],
             stats: [
-                "A → T",
-                "25% of exotic cats analyzed",
-                "Species: Leopard cat, fishing cat",
+                "Residue: Ala52",
+                "Variant: A → T",
+                "Variant Frequency: 25% of exotic cats analyzed",
+                "Exotic Cat Species: Leopard cat, fishing cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -267,13 +343,16 @@ export const chain1_sequence: Sequence = {
             id: 17,
             indices: [52],
             stats: [
-                "L → R/S/E",
-                "37.5% of exotic cats analyzed (R)\n",
-                "12.5% of exotic cats analyzed (S)\n",
-                "25% of exotic cats analyzed (E)",
-                "Species: Cougar, African lion, Bengal tiger (R)\n",
-                "Iberian lynx (S)\n",
-                "Leopard cat, fishing cat (E)",
+                "Residue: Leu53",
+                "Variant: L → R, S, E",
+                "Variant Frequency: ",
+                "(R) 37.5% of exotic cats analyzed",
+                "(S) 12.5% of exotic cats analyzed",
+                "(E) 25% of exotic cats analyzed",
+                "Exotic Cat Species:",
+                "(R) Cougar, African lion, Bengal tiger",
+                "(S) Iberian lynx",
+                "(E) Leopard cat, fishing cat",
             ],
             variant_type: "exotic",
         },
@@ -283,11 +362,12 @@ export const chain1_sequence: Sequence = {
             id: 18,
             indices: [53],
             stats: [
-                "P → S",
-                "62.5% of exotic cats analyzed",
-                "Species: Black-footed cat, African lion, Bengal tiger, leopard ",
-                "cat, fishing cat",
+                "Residue: Pro54",
+                "Variant: P → S",
+                "Variant Frequency: 62.5% of exotic cats analyzed",
+                "Exotic Cat Species: Black-footed cat, African lion, Bengal tiger, leopard cat, fishing cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -296,10 +376,12 @@ export const chain1_sequence: Sequence = {
             id: 19,
             indices: [54],
             stats: [
-                "V → E",
-                "25% of exotic cats analyzed",
-                "Species: Leopard cat, fishing cat",
+                "Residue: Val55",
+                "Variant: V → E",
+                "Variant Frequency: 25% of exotic cats analyzed",
+                "Exotic Cat Species: Leopard cat, fishing cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -308,14 +390,18 @@ export const chain1_sequence: Sequence = {
             id: 20,
             indices: [57],
             stats: [
-                "E → A/D/K",
-                "25% of exotic cats analyzed (A)\n",
-                "25% of exotic cats analyzed (D)\n",
-                "8.3% of exotic cats analyzed (K)",
-                "Species: Cougar, Iberian lynx (A)\n",
-                "African lion, Bengal tiger (D)\n",
-                "Leopard cat (K)",
+                "Residue: Glu58",
+                "Variant: E → A, D, K",
+                "Variant Frequency: ",
+                "(A) 25% of exotic cats analyzed",
+                "(D) 25% of exotic cats analyzed",
+                "(K) 8.3% of exotic cats analyzed",
+                "Exotic Cat Species:",
+                "(A) Cougar, Iberian lynx",
+                "(D) African lion, Bengal tiger",
+                "(K) Leopard cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -324,14 +410,18 @@ export const chain1_sequence: Sequence = {
             id: 21,
             indices: [61],
             stats: [
-                "I → N/K/T",
-                "12.5% of exotic cats analyzed (N)\n",
-                "25% of exotic cats analyzed (K)\n",
-                "25% of exotic cats analyzed (T)",
-                "Species: Black-footed cat (N)\n",
-                "Cougar, Iberian lynx (K)\n",
-                "African lion, Bengal tiger (T)",
+                "Residue: Ile62",
+                "Variant: I → N, K, T",
+                "Variant Frequency: ",
+                "(N) 12.5% of exotic cats analyzed",
+                "(K) 25% of exotic cats analyzed",
+                "(T) 25% of exotic cats analyzed",
+                "Exotic Cat Species:",
+                "(N) Black-footed cat",
+                "(K) Cougar, Iberian lynx",
+                "(T) African lion, Bengal tiger",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -340,11 +430,16 @@ export const chain1_sequence: Sequence = {
             id: 22,
             indices: [66],
             stats: [
-                "V → I/A",
-                "8.3% of exotic cats analyzed (I)\n",
-                "12.5% of exotic cats analyzed (A)",
-                "Species: Cougar (I)\nAfrican lion (A)",
+                "Residue: Val67",
+                "Variant: V → I, A",
+                "Variant Frequency: ",
+                "(I) 8.3% of exotic cats analyzed",
+                "(A) 12.5% of exotic cats analyzed",
+                "Exotic Cat Species:",
+                "(I) Cougar",
+                "(A) African lion",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -353,10 +448,12 @@ export const chain1_sequence: Sequence = {
             id: 23,
             indices: [75],
             stats: [
-                "K → T",
-                "12.5% of exotic cats analyzed",
-                "Species: Black-footed cat",
+                "Residue: Lys76",
+                "Variant: K → T",
+                "Variant Frequency: 12.5% of exotic cats analyzed",
+                "Exotic Cat Species: Black-footed cat",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -365,10 +462,12 @@ export const chain1_sequence: Sequence = {
             id: 24,
             indices: [81],
             stats: [
-                "L → V",
-                "50% of exotic cats analyzed",
-                "Species: Cougar, Iberian lynx, African lion, Bengal tiger",
+                "Residue: Leu82",
+                "Variant: L → V",
+                "Variant Frequency: 50% of exotic cats analyzed",
+                "Exotic Cat Species: Cougar, Iberian lynx, African lion, Bengal tiger",
             ],
+
             variant_type: "exotic",
         },
         {
@@ -376,7 +475,13 @@ export const chain1_sequence: Sequence = {
             color: "#d60093",
             id: 25,
             indices: [84],
-            stats: ["K → R", "8.3% of exotic cats analyzed", "Species: Leopard cat"],
+            stats: [
+                "Residue: Lys85",
+                "Variant: K → R",
+                "Variant Frequency: 8.3% of exotic cats analyzed",
+                "Exotic Cat Species: Leopard cat",
+            ],
+
             variant_type: "exotic",
         },
         {
@@ -385,10 +490,12 @@ export const chain1_sequence: Sequence = {
             id: 26,
             indices: [90],
             stats: [
-                "L → G",
-                "25% of exotic cats analyzed",
-                "Species: Cougar, Iberian lynx",
+                "Residue: Leu91",
+                "Variant: L → G",
+                "Variant Frequency: 25% of exotic cats analyzed",
+                "Exotic Cat Species: Cougar, Iberian lynx",
             ],
+
             variant_type: "exotic",
         },
     ],
