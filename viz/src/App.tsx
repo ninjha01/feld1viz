@@ -19,6 +19,8 @@ import { AtomSel } from "./components/3DmolTypes";
 
 const App = () => {
   const [clickedAtom, setClickedAtom] = useState<Residue | null>(null);
+  const [seq1VarType, setSeq1VarType] = useState<"domestic" | "exotic">("domestic")
+  const [seq2VarType, setSeq2VarType] = useState<"domestic" | "exotic">("domestic")
 
   return (
     <div className="App">
@@ -36,6 +38,8 @@ const App = () => {
                 variants={chain1_sequence.variants.concat(
                   chain2_sequence.variants
                 )}
+                seq1VarType={seq1VarType}
+                seq2VarType={seq2VarType}
               />
             </ErrorBoundary>
           </Col>
@@ -44,8 +48,9 @@ const App = () => {
               <SequenceViz
                 title={"Chain 1"}
                 sequence={chain1_sequence}
+                variantType={seq1VarType}
+                setVariantType={setSeq1VarType}
                 clickCallback={setClickedAtom}
-                cutsites={{ indices: [] }}
               />
             </ErrorBoundary>
             <br />
@@ -54,7 +59,10 @@ const App = () => {
                 title={"Chain 2"}
                 sequence={chain2_sequence}
                 clickCallback={setClickedAtom}
-                cutsites={{ indices: [] }}
+                variantType={seq2VarType}
+                setVariantType={setSeq2VarType}
+
+
               />
             </ErrorBoundary>
           </Col>

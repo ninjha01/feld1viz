@@ -15,7 +15,6 @@ export interface Variant {
   indices: number[];
   stats: string[];
   variant_type: "domestic" | "exotic";
-  correlated_ids: number[];
   color: string;
   chain: "A" | "B";
 }
@@ -34,18 +33,15 @@ export const SequenceViz = (props: {
   title: string;
   sequence: Sequence;
   clickCallback: (a: Residue) => void;
-  cutsites: cutSites;
+  variantType: "domestic" | "exotic"
+  setVariantType: (x: "domestic" | "exotic") => void;
 }) => {
   const [selectedResidue, setSelectedResidue] = useState<Residue | null>(null);
   const [modalText, setModalText] = useState<string[] | null>(null);
-  const [correlated, setCorrelated] = useState<number[] | undefined>(undefined);
-  const [variantType, setVariantType] = useState<"domestic" | "exotic">(
-    "domestic"
-  );
   const getVariants = (residue: Residue): Variant[] => {
     const variants = new Set<Variant>();
     props.sequence.variants.forEach((v) => {
-      if (variantType === v.variant_type && v.indices.includes(residue.resi)) {
+      if (props.variantType === v.variant_type && v.indices.includes(residue.resi)) {
         variants.add(v);
       }
     });
@@ -87,25 +83,6 @@ export const SequenceViz = (props: {
       return () => {
         console.log("called", r, v);
         setSelectedResidue(r);
-        if (sequence && v) {
-          const corVars: number[] = v.correlated_ids
-            .map((i) => {
-              const correlatedIndices = sequence.variants.find(
-                (x) => x.id === i
-              )?.indices;
-              if (correlatedIndices) {
-                return correlatedIndices;
-              } else {
-                console.log("Couldn't find correlated indices for", r, v);
-                return [];
-              }
-            })
-            .flat();
-
-          setCorrelated(corVars);
-        } else {
-          setCorrelated(undefined);
-        }
         if (r.structureIndex) {
           props.clickCallback(r);
         }
@@ -120,11 +97,7 @@ export const SequenceViz = (props: {
     const getTextColor = (
       r: Residue,
       variants: Variant[],
-      correlatedIds: number[]
     ) => {
-      if (correlatedIds.includes(r.resi)) {
-        return colors.gold;
-      }
       const isSelected = selectedResidue?.resi === r.resi;
       if (isSelected) {
         return colors.red;
@@ -143,8 +116,7 @@ export const SequenceViz = (props: {
 
     const renderResidue = (r: Residue) => {
       const variants = getVariants(r);
-      const correlatedIds = correlated ? correlated : [];
-      const textColor = getTextColor(r, variants, correlatedIds);
+      const textColor = getTextColor(r, variants);
       const relevantVariant = variants.values().next().value; // use first variant
       return (
         <>
@@ -156,7 +128,7 @@ export const SequenceViz = (props: {
               background: `-webkit-linear-gradient(${textColor}, ${textColor})`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textDecoration: props.sequence.conservedRegions.includes(r.resi) && variantType == "domestic"
+              textDecoration: props.sequence.conservedRegions.includes(r.resi) && props.variantType == "domestic"
                 ? `underline dotted ${colors.black}`
                 : "initial",
               position: "relative",
@@ -216,10 +188,10 @@ export const SequenceViz = (props: {
           variant="outline-info"
           name="radio"
           value={"domestic"}
-          checked={variantType === "domestic"}
-          onChange={(_) => {
+          checked={props.variantType === "domestic"}
+          onChange={(_: any) => {
             setSelectedResidue(null);
-            setVariantType("domestic");
+            props.setVariantType("domestic");
           }}
         >
           Domestic
@@ -229,10 +201,10 @@ export const SequenceViz = (props: {
           variant="outline-info"
           name="radio"
           value={"exotic"}
-          checked={variantType === "exotic"}
-          onChange={(_) => {
+          checked={props.variantType === "exotic"}
+          onChange={(_: any) => {
             setSelectedResidue(null);
-            setVariantType("exotic");
+            props.setVariantType("exotic");
           }}
         >
           Exotic

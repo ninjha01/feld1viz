@@ -98,7 +98,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#00b050",
-            correlated_ids: [1, 4, 8],
             id: 0,
             indices: [4],
             stats: ["R → C", "20% of domestic cats"],
@@ -107,7 +106,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#00b050",
-            correlated_ids: [0, 4, 8],
             id: 1,
             indices: [17],
             stats: ["W → S", "24% of domestic cats"],
@@ -116,7 +114,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#000000",
-            correlated_ids: [3, 5, 6, 7, 9],
             id: 2,
             indices: [36],
             stats: ["T → M", "2% of domestic cats (one individual)"],
@@ -125,7 +122,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#000000",
-            correlated_ids: [2, 5, 6, 7, 9],
             id: 3,
             indices: [41],
             stats: ["E → K", "2% of domestic cats (one individual)"],
@@ -134,7 +130,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#00b050",
-            correlated_ids: [0, 1, 8],
             id: 4,
             indices: [50],
             stats: ["K → N", "28% of domestic cats"],
@@ -143,7 +138,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#000000",
-            correlated_ids: [2, 3, 6, 7, 9],
             id: 5,
             indices: [52],
             stats: ["L → R", "2% of domestic cats (one individual)"],
@@ -152,7 +146,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#000000",
-            correlated_ids: [2, 3, 5, 7, 9],
             id: 6,
             indices: [57],
             stats: ["E → A", "2% of domestic cats (one individual)"],
@@ -161,7 +154,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#000000",
-            correlated_ids: [2, 3, 5, 6, 9],
             id: 7,
             indices: [61],
             stats: ["I → N", "2% of domestic cats (one individual)"],
@@ -170,7 +162,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#00b050",
-            correlated_ids: [0, 1, 4],
             id: 8,
             indices: [81],
             stats: ["L → V", "26% of domestic cats"],
@@ -179,7 +170,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#000000",
-            correlated_ids: [2, 3, 5, 6, 7],
             id: 9,
             indices: [88],
             stats: ["S → N", "2% of domestic cats (one individual)"],
@@ -188,7 +178,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [13, 14, 16, 18, 19, 22, 23, 25, 26],
             id: 10,
             indices: [1],
             stats: ["K → E", "12.5% of exotic cats analyzed", "Species: Cougar"],
@@ -197,7 +186,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [12, 15, 17, 20, 21, 24],
             id: 11,
             indices: [4],
             stats: [
@@ -211,7 +199,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [11, 15, 17, 20, 21, 24],
             id: 12,
             indices: [17],
             stats: [
@@ -225,7 +212,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 14, 16, 18, 19, 22, 23, 25, 26],
             id: 13,
             indices: [25],
             stats: [
@@ -238,7 +224,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 16, 18, 19, 22, 23, 25, 26],
             id: 14,
             indices: [30],
             stats: [
@@ -252,7 +237,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [11, 12, 17, 20, 21, 24],
             id: 15,
             indices: [50],
             stats: [
@@ -268,7 +252,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 18, 19, 22, 23, 25, 26],
             id: 16,
             indices: [51],
             stats: [
@@ -281,7 +264,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [11, 12, 15, 20, 21, 24],
             id: 17,
             indices: [52],
             stats: [
@@ -298,7 +280,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 16, 19, 22, 23, 25, 26],
             id: 18,
             indices: [53],
             stats: [
@@ -312,7 +293,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 16, 18, 22, 23, 25, 26],
             id: 19,
             indices: [54],
             stats: [
@@ -325,7 +305,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [11, 12, 15, 17, 21, 24],
             id: 20,
             indices: [57],
             stats: [
@@ -342,7 +321,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [11, 12, 15, 17, 20, 24],
             id: 21,
             indices: [61],
             stats: [
@@ -359,7 +337,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 16, 18, 19, 23, 25, 26],
             id: 22,
             indices: [66],
             stats: [
@@ -373,7 +350,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 16, 18, 19, 22, 25, 26],
             id: 23,
             indices: [75],
             stats: [
@@ -386,7 +362,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#7030a0",
-            correlated_ids: [11, 12, 15, 17, 20, 21],
             id: 24,
             indices: [81],
             stats: [
@@ -399,7 +374,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 16, 18, 19, 22, 23, 26],
             id: 25,
             indices: [84],
             stats: ["K → R", "8.3% of exotic cats analyzed", "Species: Leopard cat"],
@@ -408,7 +382,6 @@ export const chain1_sequence: Sequence = {
         {
             chain: "A",
             color: "#d60093",
-            correlated_ids: [10, 13, 14, 16, 18, 19, 22, 23, 25],
             id: 26,
             indices: [90],
             stats: [

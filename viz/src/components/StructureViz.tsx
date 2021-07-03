@@ -15,6 +15,8 @@ export const StructureViz = (props: {
   pdb_sequence: Sequence;
   clicked: Residue | null;
   variants: Variant[];
+  seq1VarType: "domestic" | "exotic";
+  seq2VarType: "domestic" | "exotic";
 }) => {
   const [style, setStyle] = useState<style>("ribbon");
   const [previousLabels, setPreviousLabels] = useState<any[]>([]);
@@ -132,31 +134,43 @@ export const StructureViz = (props: {
       } else if (style === "ribbon") {
         viewer.setStyle({}, ribbonStyle);
       }
-      props.variants.forEach((v) => {
-        const res = props.pdb_sequence.residues[v.indices[0]];
-        let variantStyle = null;
-        if (style === "surface") {
-          variantStyle = { sphere: { radius: 1, colorfunc: () => v.color } };
-        }
-        if (style === "ribbon") {
-          variantStyle = { cartoon: { colorfunc: () => v.color } };
-        }
-        if (!res) {
-          debugger;
-        }
-        viewer.addStyle(
-          {
-            resi: res.resi,
-            resn: AACodeMap.get(res.resn)!,
-            chain: v.chain,
-          },
-          variantStyle
-        );
-      });
+      props.variants
+        .filter((v) => {
+          return (
+            (v.chain == "A" && v.variant_type == props.seq1VarType) ||
+            (v.chain == "B" && v.variant_type == props.seq2VarType)
+          );
+        })
+        .forEach((v) => {
+          const res = props.pdb_sequence.residues[v.indices[0]];
+          let variantStyle = null;
+          if (style === "surface") {
+            variantStyle = { sphere: { radius: 1, colorfunc: () => v.color } };
+          }
+          if (style === "ribbon") {
+            variantStyle = { cartoon: { colorfunc: () => v.color } };
+          }
+          if (!res) {
+            debugger;
+          }
+          viewer.addStyle(
+            {
+              resi: res.resi,
+              resn: AACodeMap.get(res.resn)!,
+              chain: v.chain,
+            },
+            variantStyle
+          );
+        });
       viewer.render();
     }
   }
-  useEffect(viewerApplyStyle, [viewer, style]);
+  useEffect(viewerApplyStyle, [
+    viewer,
+    style,
+    props.seq1VarType,
+    props.seq2VarType,
+  ]);
 
   return (
     <div
