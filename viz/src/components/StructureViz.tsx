@@ -143,25 +143,29 @@ export const StructureViz = (props: {
           );
         })
         .forEach((v) => {
-          const res = props.pdb_sequence.residues[v.indices[0]];
-          let variantStyle = null;
-          if (style === "surface") {
-            variantStyle = { sphere: { radius: 1, colorfunc: () => v.color } };
+          if (v.indices[0] - 22 > 0) {
+            /* If we're in the sequence */
+            const res = props.pdb_sequence.residues[v.indices[0]];
+            let variantStyle = null;
+            if (style === "surface") {
+              variantStyle = {
+                sphere: { radius: 1, colorfunc: () => v.color },
+              };
+            }
+            if (style === "ribbon") {
+              variantStyle = { cartoon: { colorfunc: () => v.color } };
+            }
+            if (!res) {
+              debugger;
+            }
+            viewer.addStyle(
+              {
+                resi: res.resi,
+                resn: AACodeMap.get(res.resn)!,
+              },
+              variantStyle
+            );
           }
-          if (style === "ribbon") {
-            variantStyle = { cartoon: { colorfunc: () => v.color } };
-          }
-          if (!res) {
-            debugger;
-          }
-          viewer.addStyle(
-            {
-              resi: res.resi,
-              resn: AACodeMap.get(res.resn)!,
-              chain: v.chain,
-            },
-            variantStyle
-          );
         });
       viewer.render();
     }

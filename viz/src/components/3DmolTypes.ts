@@ -26,7 +26,7 @@ export interface Viewer {
 export interface AtomSel {
     resi: number;
     resn: string;
-    chain: string;
+    chain?: string;
     x?: number;
     y?: number;
     z?: number;
