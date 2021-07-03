@@ -27,13 +27,14 @@ export const StructureViz = (props: {
 
   const colorByStructure = (atom: Residue) => {
     let color = colors.dark_grey;
-
-    if (atom.chain === "A") {
+    if (atom.resi > 0 && atom.resi <= 70) {
       color = colors.light_grey;
-    }
-    if (atom.chain === "B") {
+    } else if (atom.resi > 71 && atom.resi <= 146) {
       color = colors.light_pink;
+    } else {
+      console.log("Unexpected atom index", atom);
     }
+
     return color;
   };
 
